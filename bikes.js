@@ -67,9 +67,11 @@ $(document).ready(function(){
             if(!result[0]){
               return
             }
+            console.log(result);
             // IF DEALER, UPDATE COOKIE WITH DEALER INFO
             if(result[0]['dealer']){
               var dealer = result[0]['dealer'];
+              console.log(dealer);
               var dealerArray = $.cookie('dealers') ? $.cookie('dealers') : [];
               dealerArray.push(dealer);
               $.cookie('dealers', dealerArray);
