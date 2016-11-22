@@ -1,10 +1,17 @@
 $(document).ready(function(){
-  $('#button').on('click', postcodeLookup );
-
   // CREATE COOKIE
   $.cookie('postcode', '');
   $.cookie('dealers', []);
   $.cookie('velofix', false);
+
+  // EVENTHANDLER
+  $('#button').on('click', function(){
+    var postcode = $('#input').val();
+    console.log(postcode);
+    $.cookie('postcode', postcode)
+    // postcodeLookup();
+  });
+
 
   // IF COOKIE:POSTCODE, INVOKE FUNCTION TO RENDER PURCHASE OPTIONS
   // ELSE IF !COOKIE:POSTCODE, INVOKE FUNCTION TO PERFORM POSTCODE LOOKUP
