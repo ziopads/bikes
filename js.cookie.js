@@ -5,7 +5,6 @@
  * Copyright 2006, 2014 Klaus Hartl
  * Released under the MIT license
  */
- console.log("THIS IS A TEST");
 (function (factory) {
 	var jQuery;
 	if (typeof define === 'function' && define.amd) {
