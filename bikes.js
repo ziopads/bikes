@@ -39,7 +39,6 @@ $(document).ready(function(){
           // QUERY WES'S API
           $.getJSON("http://departmentofscience.com/clients/spot/query.php?postcode=" + postcode, function(result){
             console.log(result);
-            if
             // IF STORE AND VELOFIX, SET COOKIE ACCORDINGLY
             if(result[0]['dealer']){
               console.log("There's a dealer!");
