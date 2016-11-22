@@ -1,4 +1,5 @@
 $(document).ready(function(){
+  $('#button').on('click', postcodeLookup );
 
   // CREATE COOKIE
   $.cookie('postcode', '');
@@ -14,35 +15,35 @@ $(document).ready(function(){
 
   }
   // FUNCTION TO PERFORM POSTCODE LOOKUP
-  function zipcodeLookup(postcode) {
+  function postcodeLookup(postcode) {
+    console.log("working");
     // IF NUMERIC
-    // DEFINE CONDITION
+      // DEFINE CONDITION
     $.getJSON( "http://api.geonames.org/findNearbyPostalCodesJSON?postalcode=80304&country=us&radius=16&username=spotbrand", function(data) {
-      console.log(data);
+      var postalCodes = [];
+      for (var i = 0; i < data.postalCodes.length; i++) {
+        postalCodes.push(data.postalCodes[i]['postalCode']);
+      }
+      console.log(postalCodes);
       // FOR EACH ZIPCODE, QUERY STORE/VELOFIX CONDITIONS
-      $.each(data, function(key, val) {
-        items.push( "<li id='" + key + "'>" + val + "</li>" );
+      $.each(postalCodes, function(key, value) {
+        var postcode = Number.parseInt(value);
         // QUERY WES'S API
-        // $.getJSON("http://departmentofscience.com/clients/spot/query.php?postcode=`item`", function(){
+        $.getJSON("http://departmentofscience.com/clients/spot/query.php?postcode=" + postcode, function(result){
+          console.log(result);
         //   // IF STORE AND VELOFIX, SET COOKIE ACCORDINGLY
         //   // ELSE IF STORE AND !VELOFIX
         //   // ELSE IF !STORE AND VELOFIX, SET COOKIE ACCORDINGLY
         //   // ELSE IF !STORE AND !VELOFIX, SET COOKIE ACCORDINGLY
-        // })
+        })
       })
     });
 
     // IF ALPHA
-    $.getJSON( "http://api.geonames.org/findNearbyPostalCodesJSON?postalcode=80304&country=us&radius=16&username=spotbrand", function( data ) {
-
-        })
-      });
-      $( "<ul/>", {
-        "class": "my-new-list",
-        html: items.join( "" )
-      }).appendTo( "body" );
-    });
-
+  //
+  //     });
+  //   });
+  //
   }
 
 
