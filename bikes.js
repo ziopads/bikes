@@ -19,7 +19,7 @@ $(document).ready(function(){
     console.log("working");
     // IF NUMERIC
       // DEFINE CONDITION
-    $.getJSON( "http://api.geonames.org/findNearbyPostalCodesJSON?postalcode=80304&country=us&radius=16&username=spotbrand", function(data) {
+    $.getJSON( "http://api.geonames.org/findNearbyPostalCodesJSON?country=us&radius=16&username=spotbrand&postalcode=" + "80401", function(data) {
       var postalCodes = [];
       for (var i = 0; i < data.postalCodes.length; i++) {
         postalCodes.push(data.postalCodes[i]['postalCode']);
