@@ -6,8 +6,10 @@ $(document).ready(function(){
   // EVENTHANDLER
   $('#button').on('click', function(){
     var postcode = $('#input').val();
-    $.cookie('postcode', postcode)
+    $.cookie.raw = true;
+    $.cookie('postcode', postcode, { expires: 30, path: '/' })
     $.cookie('dealers', []);
+    $.cookie('test', {[]})
     $.cookie('velofix', false);
     postcodeLookup(postcode);
   });
