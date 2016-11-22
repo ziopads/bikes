@@ -23,10 +23,8 @@ $(document).ready(function(){
   // FUNCTION TO PERFORM POSTCODE LOOKUP
   function postcodeLookup(postcode) {
     console.log(postcode);
-    // IF !NUMERIC
+    // IF !NUMERIC, QUERY CANADA
     if(isNaN(postcode)){
-      // REMOVE ANY SPACES IN THE STRING
-      console.log(postcode);
       $.getJSON( "http://api.geonames.org/findNearbyPostalCodesJSON?country=ca&radius=16&username=spotbrand&postalcode=" + postcode, function(data) {
         var postalCodes = [];
         for (var i = 0; i < data.postalCodes.length; i++) {
@@ -35,22 +33,26 @@ $(document).ready(function(){
         console.log(postalCodes);
         // FOR EACH ZIPCODE, QUERY STORE/VELOFIX CONDITIONS
         $.each(postalCodes, function(key, value) {
-          var postcode = Number.parseInt(value);
-          // QUERY WES'S API
+          // var postcode = Number.parseInt(value);
           $.getJSON("http://departmentofscience.com/clients/spot/query.php?postcode=" + postcode, function(result){
-            console.log(result);
-            // IF STORE AND VELOFIX, SET COOKIE ACCORDINGLY
-            if(result[0]['dealer']){
-              console.log("There's a dealer!");
-              $.cookie('dealers', []);
-              $.cookie('velofix', false);
+            if(!result[0]){
+              return
             }
-            // ELSE IF STORE AND !VELOFIX
-            // ELSE IF !STORE AND VELOFIX, SET COOKIE ACCORDINGLY
-            // ELSE IF !STORE AND !VELOFIX, SET COOKIE ACCORDINGLY
+            // IF DEALER, UPDATE COOKIE WITH DEALER INFO
+            if(result[0]['dealer']){
+              var dealer = result[0]['dealer'];
+              var dealerArray = $.cookie('dealers') ? $.cookie('dealers') : [];
+              dealerArray.push(dealer);
+              $.cookie('dealers', dealerArray);
+            }
+            // IF VELOFIX, UPDATE COOKIE WITH VELOFIX INFO
+            if(result[0]['velofix']){
+              $.cookie('velofix', true);
+            }
           })
         })
       });
+    // ELSE IF NUMERIC, QUERY US
     } else {
       $.getJSON( "http://api.geonames.org/findNearbyPostalCodesJSON?country=us&radius=16&username=spotbrand&postalcode=" + postcode, function(data) {
         var postalCodes = [];
@@ -61,22 +63,24 @@ $(document).ready(function(){
         // FOR EACH ZIPCODE, QUERY STORE/VELOFIX CONDITIONS
         $.each(postalCodes, function(key, value) {
           var postcode = Number.parseInt(value);
-          // QUERY WES'S API
           $.getJSON("http://departmentofscience.com/clients/spot/query.php?postcode=" + postcode, function(result){
-            console.log(result);
-            //   // IF STORE AND VELOFIX, SET COOKIE ACCORDINGLY
-            //   // ELSE IF STORE AND !VELOFIX
-            //   // ELSE IF !STORE AND VELOFIX, SET COOKIE ACCORDINGLY
-            //   // ELSE IF !STORE AND !VELOFIX, SET COOKIE ACCORDINGLY
+            if(!result[0]){
+              return
+            }
+            // IF DEALER, UPDATE COOKIE WITH DEALER INFO
+            if(result[0]['dealer']){
+              var dealer = result[0]['dealer'];
+              var dealerArray = $.cookie('dealers') ? $.cookie('dealers') : [];
+              dealerArray.push(dealer);
+              $.cookie('dealers', dealerArray);
+            }
+            // IF VELOFIX, UPDATE COOKIE WITH VELOFIX INFO
+            if(result[0]['velofix']){
+              $.cookie('velofix', true);
+            }
           })
         })
       });
     }
-
-    // IF ALPHA
-  //
-  //     });
-  //   });
-  //
   }
 })
