@@ -6,10 +6,11 @@ $(document).ready(function(){
 
   // EVENTHANDLER
   $('#button').on('click', function(){
-    var postcode = $('#input').val();
-    console.log(postcode);
-    $.cookie('postcode', postcode)
-    // postcodeLookup();
+    // var postcode = $('#input').val();
+    // console.log(postcode);
+    // $.cookie('postcode', postcode)
+    $.cookie('postcode', $('#input').val())
+    postcodeLookup();
   });
 
 
