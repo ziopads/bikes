@@ -44,11 +44,11 @@ $(document).ready(function(){
               var dealer = result[0]['dealer'];
               var dealerArray = $.cookie('dealers') ? $.cookie('dealers') : [];
               dealerArray.push(dealer);
-              $.cookie('dealers', dealerArray);
+              $.cookie('dealers', dealerArray, { expires: 30, path: '/' });
             }
             // IF VELOFIX, UPDATE COOKIE WITH VELOFIX INFO
             if(result[0]['velofix']){
-              $.cookie('velofix', true);
+              $.cookie('velofix', true, { expires: 30, path: '/' });
             }
           })
         })
@@ -77,11 +77,11 @@ $(document).ready(function(){
               console.log("Dealer Array before push", dealerArray);
               dealerArray.push(dealer);
               console.log("Dealer Array after push", dealerArray);
-              $.cookie('dealers', dealerArray);
+              $.cookie('dealers', dealerArray, { expires: 30, path: '/' });
             }
             // IF VELOFIX, UPDATE COOKIE WITH VELOFIX INFO
             if(result[0]['velofix']){
-              $.cookie('velofix', true);
+              $.cookie('velofix', true, { expires: 30, path: '/' });
             }
           })
         })
