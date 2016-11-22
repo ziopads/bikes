@@ -8,7 +8,7 @@ $(document).ready(function(){
     var postcode = $('#input').val();
     $.cookie.raw = true;
     $.cookie('postcode', postcode, { expires: 30, path: '/' })
-    $.cookie('dealers', '[]');
+    $.cookie('dealers', []);
     // $.cookie('test', {[]})
     $.cookie('velofix', false);
     postcodeLookup(postcode);
