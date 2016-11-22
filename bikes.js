@@ -21,9 +21,10 @@ $(document).ready(function(){
 
   // FUNCTION TO PERFORM POSTCODE LOOKUP
   function postcodeLookup(postcode) {
+    console.log(postcode);
     // IF !NUMERIC
     // if(isNaN(postcode)){
-    //   $.getJSON( "http://api.geonames.org/findNearbyPostalCodesJSON?country=ca&radius=16&username=spotbrand&postalcode=" + "postcode", function(data) {
+    //   $.getJSON( "http://api.geonames.org/findNearbyPostalCodesJSON?country=ca&radius=16&username=spotbrand&postalcode=" + postcode, function(data) {
     //     var postalCodes = [];
     //     for (var i = 0; i < data.postalCodes.length; i++) {
     //       postalCodes.push(data.postalCodes[i]['postalCode']);
@@ -43,7 +44,7 @@ $(document).ready(function(){
     //     })
     //   });
     // }
-    $.getJSON( "http://api.geonames.org/findNearbyPostalCodesJSON?country=us&radius=16&username=spotbrand&postalcode=" + "postcode", function(data) {
+    $.getJSON( "http://api.geonames.org/findNearbyPostalCodesJSON?country=us&radius=16&username=spotbrand&postalcode=" + postcode, function(data) {
       var postalCodes = [];
       for (var i = 0; i < data.postalCodes.length; i++) {
         postalCodes.push(data.postalCodes[i]['postalCode']);
