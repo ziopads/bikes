@@ -155,10 +155,10 @@ $(document).ready(function(){
             }
           })
         })
-        .done(function(){
-          renderPurchaseOptions();
-        });
       })
+      .done(function(){
+        renderPurchaseOptions();
+      });
 
     }
   }
