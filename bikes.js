@@ -72,6 +72,10 @@ $(document).ready(function(){
             // IF DEALER, UPDATE COOKIE WITH DEALER INFO
             if(result[0]['dealer']){
               var dealer = result[0]['dealer'];
+              if(dealer === 'velofix'){
+                $.cookie('velofix', true, { expires: 30, path: '/' });
+                return
+              }
               console.log(dealer);
               var dealerArray = $.cookie('dealers') ? $.cookie('dealers') : [];
               console.log("Dealer Array before push", dealerArray);
