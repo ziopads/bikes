@@ -78,9 +78,9 @@ $(document).ready(function(){
               }
               console.log(dealer);
               var dealerArray = $.cookie('dealers') ? $.cookie('dealers') : [];
-              console.log("Dealer Array before push", dealerArray);
+              // console.log("Dealer Array before push", dealerArray);
               dealerArray.push(dealer);
-              console.log("Dealer Array after push", dealerArray);
+              // console.log("Dealer Array after push", dealerArray);
               $.cookie('dealers', dealerArray, { expires: 30, path: '/' });
             }
             // IF VELOFIX, UPDATE COOKIE WITH VELOFIX INFO
