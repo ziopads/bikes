@@ -21,7 +21,7 @@ $(document).ready(function(){
   function renderPurchaseOptions(){
     // IF !DEALER && !VELOFIX, SHOW PRODELIVERY_NO, HIDE PRODELIVERY_YES
 
-    alert("RenderPurchaseOptions");
+    console.log("RenderPurchaseOptions");
     // ADD ELEMENTS INTO DOM
       // IF DEALER,
       // IF VELOFIX,
