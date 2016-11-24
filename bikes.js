@@ -121,7 +121,7 @@ $(document).ready(function(){
     // }
     // ELSE IF NUMERIC, QUERY US
     } else {
-      $.getJSON( "http://api.geonames.org/findNearbyPostalCodesJSON?country=us&radius=16&username=spotbrand&postalcode=" + postcode, function(data) {
+      $.getJSON( "https://api.geonames.org/findNearbyPostalCodesJSON?country=us&radius=16&username=spotbrand&postalcode=" + postcode, function(data) {
         var postalCodes = [];
         for (var i = 0; i < data.postalCodes.length; i++) {
           postalCodes.push(data.postalCodes[i]['postalCode']);
