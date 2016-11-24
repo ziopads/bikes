@@ -121,7 +121,7 @@ $(document).ready(function(){
     // }
     // ELSE IF NUMERIC, QUERY US
     } else {
-      $.getJSON( "http://api.geonames.org/findNearbyPostalCodesJSON?country=us&radius=16&username=spotbrand&postalcode=" + postcode, function(data) {
+      $.getJSON( "https://api.geonames.org/findNearbyPostalCodesJSON?country=us&radius=16&username=spotbrand&postalcode=" + postcode, function(data) {
         var postalCodes = [];
         for (var i = 0; i < data.postalCodes.length; i++) {
           postalCodes.push(data.postalCodes[i]['postalCode']);
@@ -130,7 +130,7 @@ $(document).ready(function(){
         // FOR EACH ZIPCODE, QUERY STORE/VELOFIX CONDITIONS
         $.each(postalCodes, function(key, value) {
           var postcode = Number.parseInt(value);
-          $.getJSON("http://departmentofscience.com/clients/spot/query.php?postcode=" + postcode, function(result){
+          $.getJSON("https://departmentofscience.com/clients/spot/query.php?postcode=" + postcode, function(result){
             if(!result[0]){
               return
             }
