@@ -6,8 +6,8 @@ $(document).ready(function(){
   // EVENTHANDLER
   $('#postcode_search').on('click', function(){
     var postcode = $('#postcode').val();
-    $.cookie.raw = true;
     $.cookie('postcode', postcode, { expires: 30, path: '/' })
+    $.cookie.raw = true;
     $.cookie('dealers', [], { expires: 30, path: '/' });
     $.cookie('velofix', false, { expires: 30, path: '/' });
     $.cookie('deliveryOption', '', { expires: 30, path: '/' });
