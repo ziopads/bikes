@@ -18,6 +18,8 @@ $(document).ready(function(){
   // IF COOKIE:POSTCODE, INVOKE FUNCTION TO RENDER PURCHASE OPTIONS
   if($.cookie('postcode')){
     $('#postcode').attr('placeholder', ($.cookie('postcode')));
+    renderPurchaseOptions();
+
   }
   // ELSE IF !COOKIE:POSTCODE, INVOKE FUNCTION TO PERFORM POSTCODE LOOKUP
 
@@ -61,15 +63,15 @@ $(document).ready(function(){
         $('li.selected').removeClass('selected');
         $(this).addClass('selected');
         console.log($(this).text());
-        updateHiddenDeliveryOption($(this).text())
+        $('#hiddenDeliveryOption').text($(this).text())
       })
     }
   }
 
   // EVENTHANDLER: FUNCTION TO WRITE hiddenDeliveryOption
-  function updateHiddenDeliveryOption(string){
-    $('#hiddenDeliveryOption').text(string);
-  }
+  // function updateHiddenDeliveryOption(string){
+  //   $('#hiddenDeliveryOption').text(string);
+  // }
 
   // FUNCTION TO PERFORM POSTCODE LOOKUP
   function postcodeLookup(postcode) {
