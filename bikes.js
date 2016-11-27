@@ -27,6 +27,9 @@ $(document).ready(function(){
     }
   //   /////////////////////////////
   //   // ELSE IF DEALER || VELOFIX, SHOW PRODELIVERY_YES, HIDE PRODELIVERY_NO
+    else if($.cookie('velofix') || $.cookie('dealers')){
+      console.log("SHOW DELIVERY OPTIONS");
+    }
   //   // FIRST, DELETE ANY EXISTING LIST ITEMS
   //   console.log("RenderPurchaseOptions");
   //   // var deliveryOptions = [];
