@@ -56,8 +56,8 @@ $(document).ready(function(){
         $('#postcode_results').append($('<li>' + deliveryOptions[i] + '</li>'));
       }
       $('#postcode_results').on('click', 'li', function(e){
-        $('li.selected').removeClass('selected');
-        $(e).addClass('selected');
+        // $('li.selected').removeClass('selected');
+        $(this).addClass('selected');
 
       })
     }
