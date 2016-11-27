@@ -19,8 +19,12 @@ $(document).ready(function(){
   ///////////////////////////////////////////////////////////////////////
   // FUNCTION TO RENDER PURCHASE OPTIONS
   ///////////////////////////////////////////////////////////////////////
-  // function renderPurchaseOptions(){
+  function renderPurchaseOptions(){
+    console.log("RENDER PURCHASE OPTIONS");
   //   // IF !DEALER && !VELOFIX, SHOW PRODELIVERY_NO, HIDE PRODELIVERY_YES
+    if(!$.cookie('velofix') && !$.cookie('dealers')){
+      console.log("NO DELIVERY OPTIONS");
+    }
   //   /////////////////////////////
   //   // ELSE IF DEALER || VELOFIX, SHOW PRODELIVERY_YES, HIDE PRODELIVERY_NO
   //   // FIRST, DELETE ANY EXISTING LIST ITEMS
@@ -40,7 +44,7 @@ $(document).ready(function(){
   //     $('#postcode_results').append($('<li>' + deliveryOptions[i] + '</li>'));
   //   }
   //   // ADD EVENTLISTENER TO SELECT/DESELECT OPTIONS (see below)
-  // }
+  }
 
   // EVENTHANDLER: FUNCTION TO WRITE hiddenDeliveryOption
     // DELETE hiddenDeliveryOption VALUE
@@ -93,28 +97,38 @@ $(document).ready(function(){
     // ELSE IF NUMERIC, QUERY US
     } else {
       $.getJSON( "https://secure.geonames.net/findNearbyPostalCodesJSON?country=us&radius=16&username=spotbrand&postalcode=" + postcode)
-      .then(function(data) {
-        // GET ARRAY OF JUST THE POSTAL CODES FROM THE API DATA
-        var postalCodes = [];
-        for (var i = 0; i < data.postalCodes.length; i++) {
-          postalCodes.push(data.postalCodes[i]['postalCode']);
-        }
-        console.log("POSTAL CODES from geonames api call: ", postalCodes);
-        return postalCodes;
-      }).then(function(postalCodeArray){
-        //
-        var arrayOfPromises = postalCodeArray.map(fetchDeliveryInfo);
-        console.log(arrayOfPromises);
-        return Promise.all(arrayOfPromises)
-        .then(function(arrayOfValuesOrErrors){
-          console.log("Results: ", arrayOfValuesOrErrors);
+        .then(function(data) {
+          // GET ARRAY OF JUST THE POSTAL CODES FROM THE API DATA
+          var postalCodes = [];
+          for (var i = 0; i < data.postalCodes.length; i++) {
+            postalCodes.push(data.postalCodes[i]['postalCode']);
+          }
+          console.log("POSTAL CODES from geonames api call: ", postalCodes);
+          return postalCodes;
         })
-        .catch(function(err){
-          console.log("ERRORS: ", err);
-          // return err;
-        })
-      });
-    // })
+        .then(function(postalCodeArray){
+          // CREATE AN ARRAY OF PROMISES FOR SECOND API CALL
+          var arrayOfPromises = postalCodeArray.map(fetchDeliveryInfo);
+          return Promise.all(arrayOfPromises)
+            .then(function(arrayOfValuesOrErrors){
+              var dealerArray = [];
+              for (var i = 0; i < arrayOfValuesOrErrors.length; i++) {
+                if(arrayOfValuesOrErrors[i]){
+                  var dealer = arrayOfValuesOrErrors[i][0]['dealer'];
+                  if(dealer === 'velofix'){
+                    $.cookie('velofix', true, { expires: 30, path: '/' });
+                  } else {
+                    dealerArray.push(dealer);
+                  }
+                }
+              }
+              $.cookie('dealers', dealerArray, { expires: 30, path: '/' });
+              renderPurchaseOptions();
+            })
+            .catch(function(err){
+              console.log("ERROR: ", err);
+            })
+        });
 
 
     ///////////////////////////////////////////////////////////////////////
