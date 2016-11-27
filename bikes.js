@@ -15,6 +15,16 @@ $(document).ready(function(){
   });
 
   ///////////////////////////////////////////////////////////////////////
+  // EVENTHANDLER FOR POSTCODE_RESULTS
+  ///////////////////////////////////////////////////////////////////////
+  $('#postcode_results').on('click', 'li', function(e){
+    $('li.selected').removeClass('selected');
+    $(this).addClass('selected');
+    console.log($(this).text());
+    $('#hiddenDeliveryOption').text($(this).text())
+  })
+
+  ///////////////////////////////////////////////////////////////////////
   // IF COOKIE:POSTCODE, INVOKE FUNCTION TO RENDER PURCHASE OPTIONS
   if($.cookie('postcode')){
     $('#postcode').attr('placeholder', ($.cookie('postcode')));
@@ -59,12 +69,7 @@ $(document).ready(function(){
       for (var i = 0; i < deliveryOptions.length; i++) {
         $('#postcode_results').append($('<li>' + deliveryOptions[i] + '</li>'));
       }
-      $('#postcode_results').on('click', 'li', function(e){
-        $('li.selected').removeClass('selected');
-        $(this).addClass('selected');
-        console.log($(this).text());
-        $('#hiddenDeliveryOption').text($(this).text())
-      })
+
     }
   }
 
