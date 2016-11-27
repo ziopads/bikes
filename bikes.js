@@ -1,4 +1,6 @@
 $(document).ready(function(){
+  $('#prodelivery_yes').hide();
+  $('#prodelivery_no').hide();
   ///////////////////////////////////////////////////////////////////////
   // EVENTHANDLER FOR POSTCODE SEARCH BUTTON
   ///////////////////////////////////////////////////////////////////////
@@ -42,7 +44,7 @@ $(document).ready(function(){
           deliveryOptions.push(dealerOptionsFromCookie);
         // }
       }
-      if($.cookie('velofix')){
+      if($.cookie('velofix') === 'false'){
        deliveryOptions.push('Velofix Delivery');
       }
       deliveryOptions.push('Mail it to me')
