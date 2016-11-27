@@ -10,12 +10,120 @@
 <body>
   <h1>Yo!</h1>
   <!-- <form class="" action="index.html" method="GET"> -->
-    <label for="postcode"></label>
-    <input id="postcode" type="text" name="postcode" placeholder="Please enter postcode">
+    <!-- <label for="postcode"></label>
+    <input id="postcode" type="text" name="postcode" placeholder="Please enter postcode"> -->
     <!-- <label for="submit"></label> -->
-    <input id="postcode_search" type="submit" name="submit" value="SUBMIT">
-    <div id="deliveryOptions"></div>
+    <!-- <input id="postcode_search" type="submit" name="submit" value="SUBMIT">
+    <div id="deliveryOptions"></div> -->
 
   <!-- </form> -->
+
+  <form action="/cart" method="post" novalidate class="cart">
+  <table class="responsive-table cart-table">
+    <thead class="cart__row visually-hidden">
+      <th colspan="2">Product</th>
+      <th>Quantity</th>
+      <th>Total</th>
+    </thead>
+    <tbody id="CartProducts">
+
+        <tr class="cart__row responsive-table__row">
+          <td class="cart__cell--image text-center">
+            <a href="/products/champa?variant=30044096268" class="cart__image">
+              <img src="//cdn.shopify.com/s/files/1/1430/1526/products/Champa-900x600_medium.jpg?v=1476125959" alt="Champa - 50 / Graphite">
+            </a>
+          </td>
+          <td>
+            <a href="/products/champa?variant=30044096268" class="h5">
+              Champa
+            </a>
+
+              <p>50 / Graphite</p>
+
+
+
+
+
+
+
+
+
+          </td>
+          <td class="cart__cell--quantity">
+            <label for="Updates_30044096268:0f3bcd1aa33de519d0f3c19baede8db4" class="cart__quantity-label medium-up--hide">Quantity</label>
+            <input type="number" name="updates[]" id="Updates_30044096268:0f3bcd1aa33de519d0f3c19baede8db4" class="cart__quantity" value="1" min="0" data-line="1" aria-label="Quantity">
+          </td>
+          <td class="cart__cell--total">
+
+            <span class="cart__item-total">
+              $1,799.00
+            </span>
+
+          </td>
+        </tr>
+
+    </tbody>
+  </table>
+
+  <div class="grid cart__row">
+
+
+
+    <div class="grid__item medium-up--one-half">
+
+      <div>
+
+        <h3>Pro Delivery</h3>
+        <p>Enter your postal code to see delivery options for US &amp; Canadian residents. If you live elsewhere, use our <a href="https://spot-22.myshopify.com/pages/dealers">Dealer map</a> to find your closest Spot dealer.</p>
+
+        <form action="#" method="post">
+          <input id="postcode" type="text" placeholder="Postal Code" maxlength="6" />&nbsp;&nbsp;
+          <button id="postcode_search" type="button" class="btn">Search</button>
+        </form>
+
+        <br/><br/>
+
+        <div id="prodelivery_yes" style="background: #f5f5f5;">
+
+        <p>Good news, your fully-assembled bike can be picked up at a local dealer or delivered directly to your home through <a href="#">Velofix</a>. Which option do you prefer?.</p>
+
+        <ul id="postcode_results">
+          <!-- <li class="selected"><span>Golden Bike Shop (80401)</span></li>
+          <li><span>Boulder Bike Shop (80304)</span></li>
+          <li><span>Velofix [?]</span></li> -->
+        </ul>
+
+        <br/><p>Need to locate your dealer's address? Check out our <a href="https://spot-22.myshopify.com/pages/dealers">Dealer map</a>.</p>
+
+        </div>
+
+    <br/>
+
+        <p  style="background: #f5f5f5;"id="prodelivery_no">Sorry, Pro Delivery isn't available in your area. If you're located in the US or Canada, we will ship your order directly to you. If not, please use our <a href="https://spot-22.myshopify.com/pages/dealers">Dealer map</a> to find your closest Spot dealer.</p>
+
+        </p>
+
+      </div>
+
+      <br/>
+
+      <label for="CartSpecialInstructions">Special instructions for seller</label>
+      <textarea name="note" id="CartSpecialInstructions" class="cart__note"></textarea>
+
+
+    </div>
+
+
+    <div class="grid__item cart__buttons text-right small--text-center medium-up--one-half">
+      <p class="h3 cart__subtotal" id="CartSubtotal">$1,799.00</p>
+      <p id="cartDiscountTotal">
+
+      </p>
+      <p class="cart__taxes">Shipping &amp; taxes calculated at checkout</p>
+      <button type="submit" name="update" class="btn--secondary update-cart">Update Cart</button>
+      <button type="submit" name="checkout" class="btn">Check Out</button>
+    </div>
+  </div>
+</form>
 </body>
 </html>

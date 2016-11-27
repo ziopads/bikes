@@ -1,9 +1,7 @@
 $(document).ready(function(){
-  // CREATE COOKIE
-  // $.cookie('postcode', '');
-  //
-
-  // EVENTHANDLER
+  ///////////////////////////////////////////////////////////////////////
+  // EVENTHANDLER FOR POSTCODE SEARCH BUTTON
+  ///////////////////////////////////////////////////////////////////////
   $('#postcode_search').on('click', function(){
     var postcode = $('#postcode').val();
     $.cookie.raw = true;
@@ -14,18 +12,34 @@ $(document).ready(function(){
     postcodeLookup(postcode);
   });
 
+  ///////////////////////////////////////////////////////////////////////
   // IF COOKIE:POSTCODE, INVOKE FUNCTION TO RENDER PURCHASE OPTIONS
   // ELSE IF !COOKIE:POSTCODE, INVOKE FUNCTION TO PERFORM POSTCODE LOOKUP
 
+  ///////////////////////////////////////////////////////////////////////
   // FUNCTION TO RENDER PURCHASE OPTIONS
+  ///////////////////////////////////////////////////////////////////////
   function renderPurchaseOptions(){
     // IF !DEALER && !VELOFIX, SHOW PRODELIVERY_NO, HIDE PRODELIVERY_YES
-
+    /////////////////////////////
+    // ELSE IF DEALER || VELOFIX, SHOW PRODELIVERY_YES, HIDE PRODELIVERY_NO
+    // FIRST, DELETE ANY EXISTING LIST ITEMS
     console.log("RenderPurchaseOptions");
-    // ADD ELEMENTS INTO DOM
-      // IF DEALER,
-      // IF VELOFIX,
-      // ADD SHIPPING DIRECT (if US or CA)
+    // var deliveryOptions = [];
+    var deliveryOptions = ["Brendan", "James", "Haskins"];
+    var dealerOptionsFromCookie = $.cookie('dealers');
+    console.log(dealerOptionsFromCookie);
+    // if(dealerOptionsFromCookie.length){
+    //   // PUSH EACH ELEMENT OF THE ARRAY TO deliveryOptions
+    // }
+    if($.cookie('velofix')){
+      deliveryOptions.push('Velofix Delivery');
+    }
+    for (var i = 0; i < deliveryOptions.length; i++) {
+      // var newItem = $('<li>' + deliveryOptions[i] + '</li>');
+      $('#postcode_results').append($('<li>' + deliveryOptions[i] + '</li>'));
+    }
+    // ADD EVENTLISTENER TO SELECT/DESELECT OPTIONS (see below)
   }
 
   // EVENTHANDLER: FUNCTION TO WRITE hiddenDeliveryOption
@@ -47,7 +61,7 @@ $(document).ready(function(){
         // FOR EACH ZIPCODE, QUERY STORE/VELOFIX CONDITIONS
         $.each(postalCodes, function(key, value) {
           // var postcode = Number.parseInt(value);
-          $.getJSON("http://departmentofscience.com/clients/spot/query.php?postcode=" + postcode, function(result){
+          $.getJSON("https://spotbrand.com/prodelivery/query.php?postcode=" + postcode, function(result){
             if(!result[0]){
               return
             }
@@ -72,6 +86,10 @@ $(document).ready(function(){
       .done(function(){
         renderPurchaseOptions();
       });
+
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
     // // ELSE IF NUMERIC, QUERY US
     // } else {
     //   $.getJSON( "http://api.geonames.org/findNearbyPostalCodesJSON?country=us&radius=16&username=spotbrand&postalcode=" + postcode, function(data) {
@@ -86,7 +104,7 @@ $(document).ready(function(){
     //     console.log("YO!");
     //     $.each(postalCodes, function(key, value) {
     //       var postcode = Number.parseInt(value);
-    //       $.getJSON("http://departmentofscience.com/clients/spot/query.php?postcode=" + postcode, function(result){
+    //       $.getJSON("https://spotbrand.com/prodelivery/query.php?postcode=" + postcode, function(result){
     //         if(!result[0]){
     //           return
     //         }
@@ -119,47 +137,57 @@ $(document).ready(function(){
     //
     //
     // }
-    // ELSE IF NUMERIC, QUERY US
-    } else {
-      $.getJSON( "https://secure.geonames.net/findNearbyPostalCodesJSON?country=us&radius=16&username=spotbrand&postalcode=" + postcode, function(data) {
-        var postalCodes = [];
-        for (var i = 0; i < data.postalCodes.length; i++) {
-          postalCodes.push(data.postalCodes[i]['postalCode']);
-        }
-        console.log(postalCodes);
-        // FOR EACH ZIPCODE, QUERY STORE/VELOFIX CONDITIONS
-        $.each(postalCodes, function(key, value) {
-          var postcode = Number.parseInt(value);
-          $.getJSON("http://departmentofscience.com/clients/spot/query.php?postcode=" + postcode, function(result){
-            if(!result[0]){
-              return
-            }
-            console.log(result);
-            // IF DEALER, UPDATE COOKIE WITH DEALER INFO
-            if(result[0]['dealer']){
-              var dealer = result[0]['dealer'];
-              if(dealer === 'velofix'){
-                $.cookie('velofix', true, { expires: 30, path: '/' });
-                return
-              }
-              console.log(dealer);
-              var dealerArray = $.cookie('dealers') ? $.cookie('dealers') : [];
-              // console.log("Dealer Array before push", dealerArray);
-              dealerArray.push(dealer);
-              // console.log("Dealer Array after push", dealerArray);
-              $.cookie('dealers', dealerArray, { expires: 30, path: '/' });
-            }
-            // IF VELOFIX, UPDATE COOKIE WITH VELOFIX INFO
-            if(result[0]['velofix']){
-              $.cookie('velofix', true, { expires: 30, path: '/' });
-            }
-          })
-        })
-      })
-      .done(function(){
-        renderPurchaseOptions();
-      });
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
 
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    // // ELSE IF NUMERIC, QUERY US
+    // } else {
+    //   $.getJSON( "https://secure.geonames.net/findNearbyPostalCodesJSON?country=us&radius=16&username=spotbrand&postalcode=" + postcode, function(data) {
+    //     var postalCodes = [];
+    //     for (var i = 0; i < data.postalCodes.length; i++) {
+    //       postalCodes.push(data.postalCodes[i]['postalCode']);
+    //     }
+    //     console.log(postalCodes);
+    //     // FOR EACH ZIPCODE, QUERY STORE/VELOFIX CONDITIONS
+    //     $.each(postalCodes, function(key, value) {
+    //       var postcode = Number.parseInt(value);
+    //       $.getJSON("https://spotbrand.com/prodelivery/query.php?postcode=" + postcode, function(result){
+    //         if(!result[0]){
+    //           return
+    //         }
+    //         console.log(result);
+    //         // IF DEALER, UPDATE COOKIE WITH DEALER INFO
+    //         if(result[0]['dealer']){
+    //           var dealer = result[0]['dealer'];
+    //           if(dealer === 'velofix'){
+    //             $.cookie('velofix', true, { expires: 30, path: '/' });
+    //             return
+    //           }
+    //           console.log(dealer);
+    //           var dealerArray = $.cookie('dealers') ? $.cookie('dealers') : [];
+    //           // console.log("Dealer Array before push", dealerArray);
+    //           dealerArray.push(dealer);
+    //           // console.log("Dealer Array after push", dealerArray);
+    //           $.cookie('dealers', dealerArray, { expires: 30, path: '/' });
+    //         }
+    //         // IF VELOFIX, UPDATE COOKIE WITH VELOFIX INFO
+    //         if(result[0]['velofix']){
+    //           $.cookie('velofix', true, { expires: 30, path: '/' });
+    //         }
+    //       })
+    //     })
+    //   })
+    //   .done(function(){
+    //     renderPurchaseOptions();
+    //   });
+    //
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
     }
   }
 
