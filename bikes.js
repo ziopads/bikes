@@ -45,6 +45,7 @@ $(document).ready(function(){
       if($.cookie('velofix')){
        deliveryOptions.push('Velofix Delivery');
       }
+      deliveryOptions.push('Mail it to me')
       console.log("DELIVERY OPTIONS: ", deliveryOptions);
       for (var i = 0; i < deliveryOptions.length; i++) {
         // var newItem = $('<li>' + deliveryOptions[i] + '</li>');
