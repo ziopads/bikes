@@ -21,27 +21,33 @@ $(document).ready(function(){
   ///////////////////////////////////////////////////////////////////////
   function renderPurchaseOptions(){
     console.log("RENDER PURCHASE OPTIONS");
-  //   // IF !DEALER && !VELOFIX, SHOW PRODELIVERY_NO, HIDE PRODELIVERY_YES
+    // FIRST, DELETE ANY EXISTING LIST ITEMS
+
+    // IF !DEALER && !VELOFIX, SHOW PRODELIVERY_NO, HIDE PRODELIVERY_YES
     if(!$.cookie('velofix') && !$.cookie('dealers')){
       console.log("NO DELIVERY OPTIONS");
     }
-  //   /////////////////////////////
-  //   // ELSE IF DEALER || VELOFIX, SHOW PRODELIVERY_YES, HIDE PRODELIVERY_NO
+    
+    // ELSE IF DEALER || VELOFIX, SHOW PRODELIVERY_YES, HIDE PRODELIVERY_NO
     else if($.cookie('velofix') || $.cookie('dealers')){
-      console.log("SHOW DELIVERY OPTIONS");
+      var deliveryOptions = [];
+      var dealerOptionsFromCookie = $.cookie('dealers');
+      console.log(dealerOptionsFromCookie);
+      if(dealerOptionsFromCookie.length){
+        for (var i = 0; i < dealerOptionsFromCookie.length; i++) {
+          deliveryOptions.push(dealerOptionsFromCookie[i]);
+        }
+      }
+      if($.cookie('velofix')){
+       deliveryOptions.push('Velofix Delivery');
+      }
+      console.log("DELIVERY OPTIONS: ", deliveryOptions);
     }
   //   // FIRST, DELETE ANY EXISTING LIST ITEMS
   //   console.log("RenderPurchaseOptions");
   //   // var deliveryOptions = [];
   //   var deliveryOptions = ["Brendan", "James", "Haskins"];
-  //   var dealerOptionsFromCookie = $.cookie('dealers');
-  //   console.log(dealerOptionsFromCookie);
-  //   // if(dealerOptionsFromCookie.length){
-  //   //   // PUSH EACH ELEMENT OF THE ARRAY TO deliveryOptions
-  //   // }
-  //   if($.cookie('velofix')){
-  //     deliveryOptions.push('Velofix Delivery');
-  //   }
+  //
   //   for (var i = 0; i < deliveryOptions.length; i++) {
   //     // var newItem = $('<li>' + deliveryOptions[i] + '</li>');
   //     $('#postcode_results').append($('<li>' + deliveryOptions[i] + '</li>'));
