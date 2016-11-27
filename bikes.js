@@ -57,7 +57,7 @@ $(document).ready(function(){
       }
       $('#postcode_results').on('click', 'li', function(e){
         $('li.selected').removeClass('selected');
-        e.addClass('selected');
+        $(e).addClass('selected');
 
       })
     }
