@@ -52,7 +52,7 @@ $(document).ready(function(){
     console.log(postcode);
     // IF !NUMERIC, QUERY CANADA
     if(isNaN(postcode)){
-      $.getJSON( "http://api.geonames.org/findNearbyPostalCodesJSON?country=ca&radius=16&username=spotbrand&postalcode=" + postcode, function(data) {
+      $.getJSON( "https://secure.geonames.net/findNearbyPostalCodesJSON?country=ca&radius=16&username=spotbrand&postalcode=" + postcode, function(data) {
         var postalCodes = [];
         for (var i = 0; i < data.postalCodes.length; i++) {
           postalCodes.push(data.postalCodes[i]['postalCode']);
@@ -92,7 +92,7 @@ $(document).ready(function(){
     ///////////////////////////////////////////////////////////////////////
     // ELSE IF NUMERIC, QUERY US
     } else {
-      $.getJSON( "http://api.geonames.org/findNearbyPostalCodesJSON?country=us&radius=16&username=spotbrand&postalcode=" + postcode)
+      $.getJSON( "https://secure.geonames.net/findNearbyPostalCodesJSON?country=us&radius=16&username=spotbrand&postalcode=" + postcode)
       .then(function(data) {
         var postalCodes = [];
         for (var i = 0; i < data.postalCodes.length; i++) {
