@@ -92,7 +92,8 @@ $(document).ready(function(){
     ///////////////////////////////////////////////////////////////////////
     // ELSE IF NUMERIC, QUERY US
     } else {
-      $.getJSON( "http://api.geonames.org/findNearbyPostalCodesJSON?country=us&radius=16&username=spotbrand&postalcode=" + postcode).then(function(data) {
+      $.getJSON( "http://api.geonames.org/findNearbyPostalCodesJSON?country=us&radius=16&username=spotbrand&postalcode=" + postcode)
+      .then(function(data) {
         var postalCodes = [];
         for (var i = 0; i < data.postalCodes.length; i++) {
           postalCodes.push(data.postalCodes[i]['postalCode']);
@@ -100,24 +101,19 @@ $(document).ready(function(){
         console.log("POSTAL CODES from geonames api call: ", postalCodes);
         return postalCodes;
       }).then(function(postalCodeArray){
-        console.log(postalCodeArray);
-        var newArray = [];
-        // console.log("Postal codes before the second api call: ", postalCodes);
-        $.each(postalCodeArray, function(index, value) {
-          var postcode = Number.parseInt(value);
-          // console.log("Postcode inside $.each(): ", postcode);
-          return $.getJSON("https://spotbrand.com/prodelivery/query.php?postcode=" + postcode)
-          .then(function(result){
-            console.log("postcode: ", postcode, "result: ", result);
-            newArray.push(index);
-            return postcode;
-          })
+        // console.log(postalCodeArray);
+        var arrayOfPromises = postalCodeArray.map(fetchDeliveryInfo);
+        console.log(arrayOfPromises);
+        Promise.all(arrayOfPromises)
+        .then(function(arrayOfValuesOrErrors){
+          console.log("Results: ", arrayOfValuesOrErrors);
         })
-        return [postalCodeArray, newArray];
-      })
-      .then(function(result){
-        console.log("RESULT: ", result);
+        .catch(function(err){
+          console.log("ERRORS: ", err);
+          // return err;
+        })
       });
+    // })
 
 
     ///////////////////////////////////////////////////////////////////////
@@ -184,7 +180,21 @@ $(document).ready(function(){
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
-
+  function fetchDeliveryInfo(postcode){
+    return $.getJSON("https://spotbrand.com/prodelivery/query.php?postcode=" + postcode)
+      .catch(function(err) {
+        // console.log("ERROR: ", err);
+        return err;
+      })
+      .then(function(data){
+        if(!data[0]){
+          return;
+        }
+        console.log(data[0]['dealer']);
+        console.log(data);
+        return data;
+      })
+  }
 
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
