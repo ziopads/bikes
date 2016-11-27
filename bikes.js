@@ -46,8 +46,7 @@ $(document).ready(function(){
           deliveryOptions.push(dealerOptionsFromCookie);
         // }
       }
-      console.log($.cookie('velofix'));
-      if($.cookie('velofix') === 'true'){
+      if($.cookie('velofix') === true){
        deliveryOptions.push('Velofix Delivery');
       }
       deliveryOptions.push('Mail it to me')
@@ -56,6 +55,11 @@ $(document).ready(function(){
         // var newItem = $('<li>' + deliveryOptions[i] + '</li>');
         $('#postcode_results').append($('<li>' + deliveryOptions[i] + '</li>'));
       }
+      $('#postcode_results').on('click', 'li', function(e){
+        $('li.selected').removeClass('selected');
+        e.addClass('selected');
+
+      })
     }
   //   // FIRST, DELETE ANY EXISTING LIST ITEMS
   //   console.log("RenderPurchaseOptions");
