@@ -22,14 +22,18 @@ $(document).ready(function(){
   function renderPurchaseOptions(){
     console.log("RENDER PURCHASE OPTIONS");
     // FIRST, DELETE ANY EXISTING LIST ITEMS
+    $('#postcode_results').empty();
 
     // IF !DEALER && !VELOFIX, SHOW PRODELIVERY_NO, HIDE PRODELIVERY_YES
     if(!$.cookie('velofix') && !$.cookie('dealers')){
-      console.log("NO DELIVERY OPTIONS");
+      $('#prodelivery_no').show();
+      $('#prodelivery_yes').hide();
     }
 
     // ELSE IF DEALER || VELOFIX, SHOW PRODELIVERY_YES, HIDE PRODELIVERY_NO
     else if($.cookie('velofix') || $.cookie('dealers')){
+      $('#prodelivery_yes').show();
+      $('#prodelivery_no').hide();
       var deliveryOptions = [];
       var dealerOptionsFromCookie = $.cookie('dealers');
       console.log(dealerOptionsFromCookie);
