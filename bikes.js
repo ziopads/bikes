@@ -58,21 +58,19 @@ $(document).ready(function(){
       $('#postcode_results').on('click', 'li', function(e){
         $('li.selected').removeClass('selected');
         $(this).addClass('selected');
-
+        console.log($(this).val());
+        updateHiddenDeliveryOption($(this).text())
       })
     }
-  //   // FIRST, DELETE ANY EXISTING LIST ITEMS
-  //   console.log("RenderPurchaseOptions");
-  //   // var deliveryOptions = [];
-  //   var deliveryOptions = ["Brendan", "James", "Haskins"];
-  //
-
-  //   // ADD EVENTLISTENER TO SELECT/DESELECT OPTIONS (see below)
   }
 
   // EVENTHANDLER: FUNCTION TO WRITE hiddenDeliveryOption
+  function updateHiddenDeliveryOption(string){
     // DELETE hiddenDeliveryOption VALUE
+
     // WRITE hiddenDeliveryOption VALUE
+    $('#hiddenDeliveryOption').text(string);
+  }
 
   // FUNCTION TO PERFORM POSTCODE LOOKUP
   function postcodeLookup(postcode) {
