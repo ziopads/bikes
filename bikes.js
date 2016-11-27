@@ -37,14 +37,16 @@ $(document).ready(function(){
       $('#prodelivery_yes').show();
       $('#prodelivery_no').hide();
       var deliveryOptions = [];
+      console.log("deliveryOptions", deliveryOptions);
       var dealerOptionsFromCookie = $.cookie('dealers');
-      console.log(dealerOptionsFromCookie);
+      console.log("dealerOptionsFromCookie", dealerOptionsFromCookie);
+      console.log("deliveryOptions", deliveryOptions);
       if(dealerOptionsFromCookie.length){
         // for (var i = 0; i < dealerOptionsFromCookie.length; i++) {
           deliveryOptions.push(dealerOptionsFromCookie);
         // }
       }
-      if($.cookie('velofix') === 'false'){
+      if($.cookie('velofix') === 'true'){
        deliveryOptions.push('Velofix Delivery');
       }
       deliveryOptions.push('Mail it to me')
