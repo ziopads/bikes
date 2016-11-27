@@ -46,7 +46,7 @@ $(document).ready(function(){
           deliveryOptions.push(dealerOptionsFromCookie);
         // }
       }
-      if($.cookie('velofix') === 'true'){
+      if($.cookie('velofix')){
        deliveryOptions.push('Velofix Delivery');
       }
       deliveryOptions.push('Mail it to me')
