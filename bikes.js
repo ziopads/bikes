@@ -11,6 +11,7 @@ $(document).ready(function(){
     $.cookie('dealers', [], { expires: 30, path: '/' });
     $.cookie('velofix', false, { expires: 30, path: '/' });
     $.cookie('deliveryOption', '', { expires: 30, path: '/' });
+    $.cookie('selectedDeliveryOption', '', { expires: 30, path: '/' });
     postcodeLookup(postcode);
   });
 
@@ -74,8 +75,9 @@ $(document).ready(function(){
 
     }
   }
-
+  //////////////////////////////////////////////////////////////////////
   // FUNCTION TO PERFORM POSTCODE LOOKUP
+  //////////////////////////////////////////////////////////////////////
   function postcodeLookup(postcode) {
     // var postalCodes = []
     console.log(postcode);
