@@ -35,7 +35,7 @@ $(document).ready(function(){
       console.log(dealerOptionsFromCookie);
       if(dealerOptionsFromCookie.length){
         // for (var i = 0; i < dealerOptionsFromCookie.length; i++) {
-          deliveryOptions.push(dealerOptionsFromCookie[i]);
+          deliveryOptions.push(dealerOptionsFromCookie);
         // }
       }
       if($.cookie('velofix')){
