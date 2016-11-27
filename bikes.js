@@ -17,7 +17,7 @@ $(document).ready(function(){
   ///////////////////////////////////////////////////////////////////////
   // IF COOKIE:POSTCODE, INVOKE FUNCTION TO RENDER PURCHASE OPTIONS
   if($.cookie('postcode')){
-    $('#postcode').attr('placeholder', ($.cookie('postcode'));
+    $('#postcode').attr('placeholder', ($.cookie('postcode')));
   }
   // ELSE IF !COOKIE:POSTCODE, INVOKE FUNCTION TO PERFORM POSTCODE LOOKUP
 
