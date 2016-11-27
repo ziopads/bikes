@@ -27,16 +27,16 @@ $(document).ready(function(){
     if(!$.cookie('velofix') && !$.cookie('dealers')){
       console.log("NO DELIVERY OPTIONS");
     }
-    
+
     // ELSE IF DEALER || VELOFIX, SHOW PRODELIVERY_YES, HIDE PRODELIVERY_NO
     else if($.cookie('velofix') || $.cookie('dealers')){
       var deliveryOptions = [];
       var dealerOptionsFromCookie = $.cookie('dealers');
       console.log(dealerOptionsFromCookie);
       if(dealerOptionsFromCookie.length){
-        for (var i = 0; i < dealerOptionsFromCookie.length; i++) {
+        // for (var i = 0; i < dealerOptionsFromCookie.length; i++) {
           deliveryOptions.push(dealerOptionsFromCookie[i]);
-        }
+        // }
       }
       if($.cookie('velofix')){
        deliveryOptions.push('Velofix Delivery');
