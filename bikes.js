@@ -16,6 +16,9 @@ $(document).ready(function(){
 
   ///////////////////////////////////////////////////////////////////////
   // IF COOKIE:POSTCODE, INVOKE FUNCTION TO RENDER PURCHASE OPTIONS
+  if($.cookie('postcode')){
+    $('#postcode').attr('placeholder', ($.cookie('postcode'));
+  }
   // ELSE IF !COOKIE:POSTCODE, INVOKE FUNCTION TO PERFORM POSTCODE LOOKUP
 
   ///////////////////////////////////////////////////////////////////////
@@ -52,7 +55,6 @@ $(document).ready(function(){
       deliveryOptions.push('Mail it to me')
       console.log("DELIVERY OPTIONS: ", deliveryOptions);
       for (var i = 0; i < deliveryOptions.length; i++) {
-        // var newItem = $('<li>' + deliveryOptions[i] + '</li>');
         $('#postcode_results').append($('<li>' + deliveryOptions[i] + '</li>'));
       }
       $('#postcode_results').on('click', 'li', function(e){
@@ -66,9 +68,6 @@ $(document).ready(function(){
 
   // EVENTHANDLER: FUNCTION TO WRITE hiddenDeliveryOption
   function updateHiddenDeliveryOption(string){
-    // DELETE hiddenDeliveryOption VALUE
-
-    // WRITE hiddenDeliveryOption VALUE
     $('#hiddenDeliveryOption').text(string);
   }
 
