@@ -46,16 +46,17 @@ $(document).ready(function(){
        deliveryOptions.push('Velofix Delivery');
       }
       console.log("DELIVERY OPTIONS: ", deliveryOptions);
+      for (var i = 0; i < deliveryOptions.length; i++) {
+        // var newItem = $('<li>' + deliveryOptions[i] + '</li>');
+        $('#postcode_results').append($('<li>' + deliveryOptions[i] + '</li>'));
+      }
     }
   //   // FIRST, DELETE ANY EXISTING LIST ITEMS
   //   console.log("RenderPurchaseOptions");
   //   // var deliveryOptions = [];
   //   var deliveryOptions = ["Brendan", "James", "Haskins"];
   //
-  //   for (var i = 0; i < deliveryOptions.length; i++) {
-  //     // var newItem = $('<li>' + deliveryOptions[i] + '</li>');
-  //     $('#postcode_results').append($('<li>' + deliveryOptions[i] + '</li>'));
-  //   }
+
   //   // ADD EVENTLISTENER TO SELECT/DESELECT OPTIONS (see below)
   }
 
