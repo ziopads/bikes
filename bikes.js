@@ -58,7 +58,7 @@ $(document).ready(function(){
       $('#postcode_results').on('click', 'li', function(e){
         $('li.selected').removeClass('selected');
         $(this).addClass('selected');
-        console.log($(this).val());
+        console.log($(this).text());
         updateHiddenDeliveryOption($(this).text())
       })
     }
