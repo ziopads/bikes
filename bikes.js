@@ -94,6 +94,7 @@ $(document).ready(function(){
     } else {
       $.getJSON( "https://secure.geonames.net/findNearbyPostalCodesJSON?country=us&radius=16&username=spotbrand&postalcode=" + postcode)
       .then(function(data) {
+        // GET ARRAY OF JUST THE POSTAL CODES FROM THE API DATA
         var postalCodes = [];
         for (var i = 0; i < data.postalCodes.length; i++) {
           postalCodes.push(data.postalCodes[i]['postalCode']);
@@ -101,10 +102,10 @@ $(document).ready(function(){
         console.log("POSTAL CODES from geonames api call: ", postalCodes);
         return postalCodes;
       }).then(function(postalCodeArray){
-        // console.log(postalCodeArray);
+        //
         var arrayOfPromises = postalCodeArray.map(fetchDeliveryInfo);
         console.log(arrayOfPromises);
-        Promise.all(arrayOfPromises)
+        return Promise.all(arrayOfPromises)
         .then(function(arrayOfValuesOrErrors){
           console.log("Results: ", arrayOfValuesOrErrors);
         })
@@ -182,10 +183,7 @@ $(document).ready(function(){
   /////////////////////////////////////////////////////////////////////////
   function fetchDeliveryInfo(postcode){
     return $.getJSON("https://spotbrand.com/prodelivery/query.php?postcode=" + postcode)
-      .catch(function(err) {
-        // console.log("ERROR: ", err);
-        return err;
-      })
+      .catch(error => Promise.resolve({ color: "red",   message: "Fail ;_;" }))
       .then(function(data){
         if(!data[0]){
           return;
