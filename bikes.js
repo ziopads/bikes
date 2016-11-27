@@ -20,8 +20,10 @@ $(document).ready(function(){
   $('#postcode_results').on('click', 'li', function(e){
     $('li.selected').removeClass('selected');
     $(this).addClass('selected');
-    console.log($(this).text());
-    $('#hiddenDeliveryOption').text($(this).text())
+    var selected = $(this).text();
+    console.log(selected);
+    $.cookie('selectedDeliveryOption', selected, { expires: 30, path: '/' })
+    $('#hiddenDeliveryOption').text(selected)
   })
 
   ///////////////////////////////////////////////////////////////////////
@@ -72,11 +74,6 @@ $(document).ready(function(){
 
     }
   }
-
-  // EVENTHANDLER: FUNCTION TO WRITE hiddenDeliveryOption
-  // function updateHiddenDeliveryOption(string){
-  //   $('#hiddenDeliveryOption').text(string);
-  // }
 
   // FUNCTION TO PERFORM POSTCODE LOOKUP
   function postcodeLookup(postcode) {
