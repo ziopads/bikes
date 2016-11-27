@@ -22,7 +22,7 @@ $(document).ready(function(){
     $(this).addClass('selected');
     var selected = $(this).text();
     console.log(selected);
-    $.cookie('selectedDeliveryOption', selected, { expires: 30, path: '/' })
+    $.cookie('selectedDeliveryOption', JSON.stringify(selected), { expires: 30, path: '/' })
     $('#hiddenDeliveryOption').text(selected)
   })
 
