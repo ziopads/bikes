@@ -79,10 +79,10 @@ $(document).ready(function(){
         $('#postcode_results').append($('<li>' + deliveryOptions[i] + '</li>'));
       }
       if($.cookie('selectedDeliveryOption')){
-
+        var selector = 'li:contains("$.cookie('selectedDeliveryOption')")'
         var string = $.cookie('selectedDeliveryOption');
         // console.log("STRING: ", string);
-        $('li:contains("'string'")').addClass('selected').css('color', '#004cff');
+        $(selector).addClass('selected').css('color', '#004cff');
         // console.log("TARGET: ", target);
         //
       }
