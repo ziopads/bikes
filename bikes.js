@@ -6,6 +6,7 @@ $(document).ready(function(){
   // EVENTHANDLER FOR POSTCODE SEARCH BUTTON
   ///////////////////////////////////////////////////////////////////////
   $('#postcode_search').on('click', function(){
+    event.preventDefault();
     $('#hiddenDeliveryOption').empty();
     $('#prodelivery_yes').hide();
     $('#prodelivery_no').hide();
