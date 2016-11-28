@@ -72,7 +72,7 @@ $(document).ready(function(){
         $('#postcode_results').append($('<li>' + deliveryOptions[i] + '</li>'));
       }
       if($.cookie('selectedDeliveryOption')){
-        var string = $.cookie('selectedDeliveryOption';
+        var string = $.cookie('selectedDeliveryOption');
         $('li').text(string).addClass('selected');
       }
 
