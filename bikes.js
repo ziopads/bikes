@@ -81,7 +81,9 @@ $(document).ready(function(){
 
         var string = $.cookie('selectedDeliveryOption');
         console.log("STRING: ", string);
-        $('li:contains(string)').addClass('selected').css('color', '#004cff');
+        var target = $('li:contains(string)');
+        console.log("TARGET: ", target);
+        // .addClass('selected').css('color', '#004cff');
       }
     }
   }
