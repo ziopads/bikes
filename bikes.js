@@ -77,10 +77,10 @@ $(document).ready(function(){
       for (var i = 0; i < deliveryOptions.length; i++) {
         $('#postcode_results').append($('<li>' + deliveryOptions[i] + '</li>'));
       }
-      // if($.cookie('selectedDeliveryOption')){
-      //   var string = $.cookie('selectedDeliveryOption');
-      //   $('li').text(string).addClass('selected').css('color', '#004cff');
-      // }
+      if($.cookie('selectedDeliveryOption')){
+        var string = $.cookie('selectedDeliveryOption');
+        $('li:contains(string)').addClass('selected').css('color', '#004cff');
+      }
     }
   }
   //////////////////////////////////////////////////////////////////////
