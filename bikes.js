@@ -79,8 +79,8 @@ $(document).ready(function(){
         $('#postcode_results').append($('<li>' + deliveryOptions[i] + '</li>'));
       }
       if($.cookie('selectedDeliveryOption')){
-        var selector = 'li:contains("$.cookie('selectedDeliveryOption')")'
         var string = $.cookie('selectedDeliveryOption');
+        var selector = 'li:contains("$.cookie(string)")'
         // console.log("STRING: ", string);
         $(selector).addClass('selected').css('color', '#004cff');
         // console.log("TARGET: ", target);
