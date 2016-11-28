@@ -27,6 +27,7 @@ $(document).ready(function(){
     $('#postcode li.selected').removeClass('selected');
     $(this).addClass('selected').css('color', '#004cff');
     var selected = $(this).text();
+    console.log("SELECTED VARIABLE: ", selected);
     // $.cookie('selectedDeliveryOption', JSON.stringify(selected), { expires: 30, path: '/' })
     $.cookie('selectedDeliveryOption', selected, { expires: 30, path: '/' })
     $('#hiddenDeliveryOption').text(selected)
@@ -82,7 +83,7 @@ $(document).ready(function(){
 
         var string = $.cookie('selectedDeliveryOption');
         console.log("STRING: ", string);
-        var target = $('#postcode_results li:contains(string)');
+        var target = $('#postcode_results li:contains('string')');
         console.log("TARGET: ", target);
         // .addClass('selected').css('color', '#004cff');
       }
