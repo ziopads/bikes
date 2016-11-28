@@ -54,7 +54,7 @@ $(document).ready(function(){
     }
 
     // ELSE IF DEALER || VELOFIX, SHOW PRODELIVERY_YES, HIDE PRODELIVERY_NO
-    else if($.cookie('velofix') || $.cookie('dealers')){
+    else if($.cookie('velofix') === 'true' || $.cookie('dealers')){
       $('#prodeliver_loading').hide();
       $('#prodelivery_no').hide();
       $('#prodelivery_yes').show();
