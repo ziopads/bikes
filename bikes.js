@@ -42,7 +42,7 @@ $(document).ready(function(){
     $('#postcode_results').empty();
 
     // IF !DEALER && !VELOFIX, SHOW PRODELIVERY_NO, HIDE PRODELIVERY_YES
-    if(!$.cookie('velofix') && !$.cookie('dealers')){
+    if($.cookie('velofix') === false && !$.cookie('dealers')){
       $('#prodelivery_no').show();
       $('#prodelivery_yes').hide();
     }
