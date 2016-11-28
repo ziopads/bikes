@@ -20,7 +20,7 @@ $(document).ready(function(){
   ///////////////////////////////////////////////////////////////////////
   $('#postcode_results').on('click', 'li', function(e){
     // $('#postcode li.selected').removeClass('selected');
-    $('#postcode li.selected').css('color', '#888');
+    $('#postcode_results li.selected').css('color', '#888');
     $(this).addClass('selected').css('color', '#004cff');
     var selected = $(this).text();
     $.cookie('selectedDeliveryOption', JSON.stringify(selected), { expires: 30, path: '/' })
