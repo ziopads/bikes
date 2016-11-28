@@ -80,7 +80,7 @@ $(document).ready(function(){
       }
       if($.cookie('selectedDeliveryOption')){
         var string = $.cookie('selectedDeliveryOption');
-        var selector = 'li:contains("$.cookie(string)")'
+        var selector = 'li:contains("' + string + '")'
         // console.log("STRING: ", string);
         $(selector).addClass('selected').css('color', '#004cff');
         // console.log("TARGET: ", target);
