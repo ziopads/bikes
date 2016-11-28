@@ -80,11 +80,9 @@ $(document).ready(function(){
       }
       if($.cookie('selectedDeliveryOption')){
         var string = $.cookie('selectedDeliveryOption');
-        var selector = 'li:contains("' + string + '")'
-        // console.log("STRING: ", string);
-        $(selector).addClass('selected').css('color', '#004cff');
-        // console.log("TARGET: ", target);
-        //
+        // var selector = 'li:contains("' + string + '")'
+        $('li:contains("' + string + '")').addClass('selected').css('color', '#004cff');
+        $('#hiddenDeliveryOption').text(selected);
       }
     }
   }
