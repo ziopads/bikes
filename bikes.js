@@ -34,7 +34,6 @@ $(document).ready(function(){
     renderPurchaseOptions();
 
   }
-  // ELSE IF !COOKIE:POSTCODE, INVOKE FUNCTION TO PERFORM POSTCODE LOOKUP
 
   ///////////////////////////////////////////////////////////////////////
   // FUNCTION TO RENDER PURCHASE OPTIONS
@@ -71,6 +70,10 @@ $(document).ready(function(){
       console.log("DELIVERY OPTIONS: ", deliveryOptions);
       for (var i = 0; i < deliveryOptions.length; i++) {
         $('#postcode_results').append($('<li>' + deliveryOptions[i] + '</li>'));
+      }
+      if($.cookie('selectedDeliveryOption')){
+        var string = $.cookie('selectedDeliveryOption';
+        $('li').text(string).addClass('selected');
       }
 
     }
