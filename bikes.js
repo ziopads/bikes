@@ -1,11 +1,12 @@
 $(document).ready(function(){
+  $('#prodelivery_loading').show();
   $('#prodelivery_yes').hide();
   $('#prodelivery_no').hide();
   ///////////////////////////////////////////////////////////////////////
   // EVENTHANDLER FOR POSTCODE SEARCH BUTTON
   ///////////////////////////////////////////////////////////////////////
   $('#postcode_search').on('click', function(){
-    $('#prodeliver_loading').show();
+    $('#prodelivery_loading').show();
     var postcode = $('#postcode').val();
     $.cookie.raw = true;
     $.cookie('postcode', postcode, { expires: 30, path: '/' });
@@ -47,15 +48,15 @@ $(document).ready(function(){
     if(!$.cookie('dealers')){
       console.log("THIS SHOULDN'T HAVE LOGGED");
     }
-    if($.cookie('velofix') === false && $.cookie('dealers') === ''){
-      $('#prodeliver_loading').hide();
+    if($.cookie('velofix') === 'false' && $.cookie('dealers') === ''){
+      $('#prodelivery_loading').hide();
       $('#prodelivery_yes').hide();
       $('#prodelivery_no').show();
     }
 
     // ELSE IF DEALER || VELOFIX, SHOW PRODELIVERY_YES, HIDE PRODELIVERY_NO
     else if($.cookie('velofix') === 'true' || $.cookie('dealers')){
-      $('#prodeliver_loading').hide();
+      $('#prodelivery_loading').hide();
       $('#prodelivery_no').hide();
       $('#prodelivery_yes').show();
       var deliveryOptions = [];
