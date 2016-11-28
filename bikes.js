@@ -74,9 +74,9 @@ $(document).ready(function(){
       console.log("deliveryOptions after velofix: ", deliveryOptions);
 
       deliveryOptions.push('Mail it to me');
-      for (var i = 0; i < deliveryOptions.length; i++) {
-        $('#postcode_results').append($('<li>' + deliveryOptions[i] + '</li>'));
-      }
+      // for (var i = 0; i < deliveryOptions.length; i++) {
+      //   $('#postcode_results').append($('<li>' + deliveryOptions[i] + '</li>'));
+      // }
       if($.cookie('selectedDeliveryOption')){
         var string = $.cookie('selectedDeliveryOption');
         $('li').text(string).addClass('selected').css('color', '#004cff');
@@ -90,7 +90,7 @@ $(document).ready(function(){
     // var postalCodes = []
     // IF !NUMERIC, QUERY CANADA
     if(isNaN(postcode)){
-      $.getJSON( "https://secure.geonames.net/findNearbyPostalCodesJSON?country=ca&radius=16&username=spotbrand&postalcode=" + postcode)
+      $.getJSON( "https://secure.geonames.net/findNearbyPostalCodesJSON?country=ca&radius=16&maxRows=20&username=spotbrand&postalcode=" + postcode)
       .catch(function(err){
         console.log("Please enter a valid postal code");
       })
