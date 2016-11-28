@@ -47,7 +47,7 @@ $(document).ready(function(){
     if(!$.cookie('dealers')){
       console.log("THIS SHOULDN'T HAVE LOGGED");
     }
-    if($.cookie('velofix') === false && !$.cookie('dealers')){
+    if($.cookie('velofix') === false && $.cookie('dealers') === ''){
       $('#prodeliver_loading').hide();
       $('#prodelivery_yes').hide();
       $('#prodelivery_no').show();
