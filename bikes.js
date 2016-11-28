@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  $('#prodelivery_loading').show();
+  $('#prodelivery_loading').hide();
   $('#prodelivery_yes').hide();
   $('#prodelivery_no').hide();
   ///////////////////////////////////////////////////////////////////////
@@ -45,6 +45,7 @@ $(document).ready(function(){
   function renderPurchaseOptions(){
     // FIRST, DELETE ANY EXISTING LIST ITEMS
     $('#postcode_results').empty();
+    console.log('postcode_results: ', $('#postcode_results'));
 
     // IF !DEALER && !VELOFIX, SHOW PRODELIVERY_NO, HIDE PRODELIVERY_YES
     if($.cookie('velofix') === 'false' && $.cookie('dealers') === ''){
@@ -60,14 +61,18 @@ $(document).ready(function(){
       $('#prodelivery_yes').show();
       var deliveryOptions = [];
       var dealerOptionsFromCookie = $.cookie('dealers');
+      console.log("dealerOptionsFromCookie: ", dealerOptionsFromCookie);
       if(dealerOptionsFromCookie.length){
         // for (var i = 0; i < dealerOptionsFromCookie.length; i++) {
           deliveryOptions.push(dealerOptionsFromCookie);
         // }
       }
+      console.log("deliveryOptions: ", deliveryOptions);
       if($.cookie('velofix') === true){
        deliveryOptions.push('Velofix Delivery');
       }
+      console.log("deliveryOptions after velofix: ", deliveryOptions);
+
       deliveryOptions.push('Mail it to me');
       for (var i = 0; i < deliveryOptions.length; i++) {
         $('#postcode_results').append($('<li>' + deliveryOptions[i] + '</li>'));
