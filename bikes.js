@@ -5,6 +5,7 @@ $(document).ready(function(){
   // EVENTHANDLER FOR POSTCODE SEARCH BUTTON
   ///////////////////////////////////////////////////////////////////////
   $('#postcode_search').on('click', function(){
+    $('#prodeliver_loading').show();
     var postcode = $('#postcode').val();
     $.cookie.raw = true;
     $.cookie('postcode', postcode, { expires: 30, path: '/' });
@@ -43,18 +44,20 @@ $(document).ready(function(){
     $('#postcode_results').empty();
 
     // IF !DEALER && !VELOFIX, SHOW PRODELIVERY_NO, HIDE PRODELIVERY_YES
-    if($.cookie('velofix')){
+    if(!$.cookie('dealers')){
       console.log("THIS SHOULDN'T HAVE LOGGED");
     }
     if($.cookie('velofix') === false && !$.cookie('dealers')){
-      $('#prodelivery_no').show();
+      $('#prodeliver_loading').hide();
       $('#prodelivery_yes').hide();
+      $('#prodelivery_no').show();
     }
 
     // ELSE IF DEALER || VELOFIX, SHOW PRODELIVERY_YES, HIDE PRODELIVERY_NO
     else if($.cookie('velofix') || $.cookie('dealers')){
-      $('#prodelivery_yes').show();
+      $('#prodeliver_loading').hide();
       $('#prodelivery_no').hide();
+      $('#prodelivery_yes').show();
       var deliveryOptions = [];
       var dealerOptionsFromCookie = $.cookie('dealers');
       if(dealerOptionsFromCookie.length){
@@ -128,7 +131,7 @@ $(document).ready(function(){
 
     // ELSE IF NUMERIC, QUERY US
     } else {
-      $.getJSON( "https://secure.geonames.net/findNearbyPostalCodesJSON?country=us&radius=160&maxRows=20&username=spotbrand&postalcode=" + postcode)
+      $.getJSON( "https://secure.geonames.net/findNearbyPostalCodesJSON?country=us&radius=16&maxRows=20&username=spotbrand&postalcode=" + postcode)
       .catch(function(err){
         console.log("Please enter a valid postal code");
       })
