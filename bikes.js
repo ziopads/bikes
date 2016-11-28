@@ -68,7 +68,7 @@ $(document).ready(function(){
       if($.cookie('velofix') === true){
        deliveryOptions.push('Velofix Delivery');
       }
-      // deliveryOptions.push('Mail it to me');
+      deliveryOptions.push('Mail it to me');
       for (var i = 0; i < deliveryOptions.length; i++) {
         $('#postcode_results').append($('<li>' + deliveryOptions[i] + '</li>'));
       }
