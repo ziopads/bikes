@@ -86,7 +86,7 @@ $(document).ready(function(){
         // GET ARRAY OF JUST THE POSTAL CODES FROM THE API DATA
         if(data.status.message){
           console.log(data.status.message);
-          return
+          return false;
         }
         console.log("DATA: ", data);
         var postalCodes = [];
@@ -96,6 +96,9 @@ $(document).ready(function(){
         return postalCodes;
       })
       .then(function(postalCodeArray){
+        if(!postalCodeArray){
+          return false;
+        }
         // CREATE AN ARRAY OF PROMISES FOR SECOND API CALL
         var arrayOfPromises = postalCodeArray.map(fetchDeliveryInfo);
         return Promise.all(arrayOfPromises)
