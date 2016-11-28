@@ -19,8 +19,8 @@ $(document).ready(function(){
   // EVENTHANDLER FOR POSTCODE_RESULTS
   ///////////////////////////////////////////////////////////////////////
   $('#postcode_results').on('click', 'li', function(e){
-    // $('#postcode li.selected').removeClass('selected');
     $('#postcode_results li.selected').css('color', '#888');
+    $('#postcode li.selected').removeClass('selected');
     $(this).addClass('selected').css('color', '#004cff');
     var selected = $(this).text();
     $.cookie('selectedDeliveryOption', JSON.stringify(selected), { expires: 30, path: '/' })
@@ -128,11 +128,12 @@ $(document).ready(function(){
 
     // ELSE IF NUMERIC, QUERY US
     } else {
-      $.getJSON( "https://secure.geonames.net/findNearbyPostalCodesJSON?country=us&radius=16&username=spotbrand&postalcode=" + postcode)
+      $.getJSON( "https://secure.geonames.net/findNearbyPostalCodesJSON?country=us&radius=160&maxRows=20&username=spotbrand&postalcode=" + postcode)
       .catch(function(err){
         console.log("Please enter a valid postal code");
       })
       .then(function(data) {
+        console.log(data);
           // GET ARRAY OF JUST THE POSTAL CODES FROM THE API DATA
           if(!data.postalCodes){
             console.log(data.status.message);
@@ -143,6 +144,7 @@ $(document).ready(function(){
           for (var i = 0; i < data.postalCodes.length; i++) {
             postalCodes.push(data.postalCodes[i]['postalCode']);
           }
+          console.log(postalCodes);
           return postalCodes;
         })
         .then(function(postalCodeArray){
