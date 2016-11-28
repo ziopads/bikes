@@ -19,7 +19,8 @@ $(document).ready(function(){
   // EVENTHANDLER FOR POSTCODE_RESULTS
   ///////////////////////////////////////////////////////////////////////
   $('#postcode_results').on('click', 'li', function(e){
-    $('li.selected').removeClass('selected');
+    // $('li.selected').removeClass('selected');
+    $('li.selected').css('color', '#004cff');
     $(this).addClass('selected').css('color', 'blue');
     var selected = $(this).text();
     $.cookie('selectedDeliveryOption', JSON.stringify(selected), { expires: 30, path: '/' })
@@ -70,7 +71,7 @@ $(document).ready(function(){
       }
       if($.cookie('selectedDeliveryOption')){
         var string = $.cookie('selectedDeliveryOption');
-        $('li').text(string).addClass('selected');
+        $('li').text(string).addClass('selected').css('color', 'blue');
       }
     }
   }
