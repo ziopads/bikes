@@ -74,13 +74,13 @@ $(document).ready(function(){
       console.log("deliveryOptions after velofix: ", deliveryOptions);
 
       deliveryOptions.push('Mail it to me');
-      // for (var i = 0; i < deliveryOptions.length; i++) {
-      //   $('#postcode_results').append($('<li>' + deliveryOptions[i] + '</li>'));
-      // }
-      if($.cookie('selectedDeliveryOption')){
-        var string = $.cookie('selectedDeliveryOption');
-        $('li').text(string).addClass('selected').css('color', '#004cff');
+      for (var i = 0; i < deliveryOptions.length; i++) {
+        $('#postcode_results').append($('<li>' + deliveryOptions[i] + '</li>'));
       }
+      // if($.cookie('selectedDeliveryOption')){
+      //   var string = $.cookie('selectedDeliveryOption');
+      //   $('li').text(string).addClass('selected').css('color', '#004cff');
+      // }
     }
   }
   //////////////////////////////////////////////////////////////////////
