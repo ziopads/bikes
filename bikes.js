@@ -27,7 +27,8 @@ $(document).ready(function(){
     $('#postcode li.selected').removeClass('selected');
     $(this).addClass('selected').css('color', '#004cff');
     var selected = $(this).text();
-    $.cookie('selectedDeliveryOption', JSON.stringify(selected), { expires: 30, path: '/' })
+    // $.cookie('selectedDeliveryOption', JSON.stringify(selected), { expires: 30, path: '/' })
+    $.cookie('selectedDeliveryOption', selected, { expires: 30, path: '/' })
     $('#hiddenDeliveryOption').text(selected)
   })
 
