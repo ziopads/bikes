@@ -84,21 +84,21 @@ $(document).ready(function(){
       })
       .then(function(data) {
         // GET ARRAY OF JUST THE POSTAL CODES FROM THE API DATA
-        // if(data.status.message){
-        //   console.log(data.status.message);
-        //   return false;
-        // }
+        if(data.status.message){
+          console.log(data.status.message);
+          return false;
+        }
         console.log("DATA: ", data);
         var postalCodes = [];
-        // for (var i = 0; i < data.postalCodes.length; i++) {
-        //   postalCodes.push(data.postalCodes[i]['postalCode']);
-        // }
+        for (var i = 0; i < data.postalCodes.length; i++) {
+          postalCodes.push(data.postalCodes[i]['postalCode']);
+        }
         return postalCodes;
       })
       .then(function(postalCodeArray){
-        // if(!postalCodeArray){
-        //   return false;
-        // }
+        if(!postalCodeArray){
+          return false;
+        }
         // CREATE AN ARRAY OF PROMISES FOR SECOND API CALL
         var arrayOfPromises = postalCodeArray.map(fetchDeliveryInfo);
         return Promise.all(arrayOfPromises)
