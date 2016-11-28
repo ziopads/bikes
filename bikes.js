@@ -82,10 +82,11 @@ $(document).ready(function(){
       if($.cookie('selectedDeliveryOption')){
 
         var string = $.cookie('selectedDeliveryOption');
-        console.log("STRING: ", string);
-        var target = $('#postcode_results li:contains('string')');
-        console.log("TARGET: ", target);
-        // .addClass('selected').css('color', '#004cff');
+        // console.log("STRING: ", string);
+        $('li:contains("string")').addClass('selected')
+        // .css('color', '#004cff');
+        // console.log("TARGET: ", target);
+        //
       }
     }
   }
