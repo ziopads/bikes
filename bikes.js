@@ -22,24 +22,22 @@ $(document).ready(function(){
     $('li.selected').removeClass('selected');
     $(this).addClass('selected');
     var selected = $(this).text();
-    console.log(selected);
     $.cookie('selectedDeliveryOption', JSON.stringify(selected), { expires: 30, path: '/' })
     $('#hiddenDeliveryOption').text(selected)
   })
 
   ///////////////////////////////////////////////////////////////////////
   // IF COOKIE:POSTCODE, INVOKE FUNCTION TO RENDER PURCHASE OPTIONS
+  ///////////////////////////////////////////////////////////////////////
   if($.cookie('postcode')){
     $('#postcode').attr('placeholder', ($.cookie('postcode')));
     renderPurchaseOptions();
-
   }
 
   ///////////////////////////////////////////////////////////////////////
   // FUNCTION TO RENDER PURCHASE OPTIONS
   ///////////////////////////////////////////////////////////////////////
   function renderPurchaseOptions(){
-    console.log("RENDER PURCHASE OPTIONS");
     // FIRST, DELETE ANY EXISTING LIST ITEMS
     $('#postcode_results').empty();
 
@@ -54,10 +52,7 @@ $(document).ready(function(){
       $('#prodelivery_yes').show();
       $('#prodelivery_no').hide();
       var deliveryOptions = [];
-      console.log("deliveryOptions", deliveryOptions);
       var dealerOptionsFromCookie = $.cookie('dealers');
-      console.log("dealerOptionsFromCookie", dealerOptionsFromCookie);
-      console.log("deliveryOptions", deliveryOptions);
       if(dealerOptionsFromCookie.length){
         // for (var i = 0; i < dealerOptionsFromCookie.length; i++) {
           deliveryOptions.push(dealerOptionsFromCookie);
@@ -67,7 +62,6 @@ $(document).ready(function(){
        deliveryOptions.push('Velofix Delivery');
       }
       deliveryOptions.push('Mail it to me')
-      console.log("DELIVERY OPTIONS: ", deliveryOptions);
       for (var i = 0; i < deliveryOptions.length; i++) {
         $('#postcode_results').append($('<li>' + deliveryOptions[i] + '</li>'));
       }
@@ -85,18 +79,19 @@ $(document).ready(function(){
     // IF !NUMERIC, QUERY CANADA
     if(isNaN(postcode)){
       $.getJSON( "https://secure.geonames.net/findNearbyPostalCodesJSON?country=ca&radius=16&username=spotbrand&postalcode=" + postcode)
+      .catch(function(err){
+        console.log("Please enter a valid postal code");
+      })
       .then(function(data) {
         // GET ARRAY OF JUST THE POSTAL CODES FROM THE API DATA
         var postalCodes = [];
         for (var i = 0; i < data.postalCodes.length; i++) {
           postalCodes.push(data.postalCodes[i]['postalCode']);
         }
-        console.log("POSTAL CODES from geonames api call: ", postalCodes);
         return postalCodes;
       })
       .then(function(postalCodeArray){
         // CREATE AN ARRAY OF PROMISES FOR SECOND API CALL
-        console.log(postalCodeArray);
         var arrayOfPromises = postalCodeArray.map(fetchDeliveryInfo);
         return Promise.all(arrayOfPromises)
           .then(function(arrayOfValuesOrErrors){
@@ -118,54 +113,19 @@ $(document).ready(function(){
             console.log("ERROR: ", err);
           })
       });
-      // , function(data) {
-      //   var postalCodes = [];
-      //   for (var i = 0; i < data.postalCodes.length; i++) {
-      //     postalCodes.push(data.postalCodes[i]['postalCode']);
-      //   }
-      //   console.log("POSTAL CODES from geonames api call: ", postalCodes);
-      //   // FOR EACH ZIPCODE, QUERY STORE/VELOFIX CONDITIONS
-      //   $.each(postalCodes, function(key, value) {
-      //     // var postcode = Number.parseInt(value);
-      //     $.getJSON("https://spotbrand.com/prodelivery/query.php?postcode=" + postcode, function(result){
-      //       if(!result[0]){
-      //         return
-      //       }
-      //       // IF DEALER, UPDATE COOKIE WITH DEALER INFO
-      //       if(result[0]['dealer']){
-      //         if(dealer === 'velofix'){
-      //           $.cookie('velofix', true, { expires: 30, path: '/' });
-      //           return
-      //         }
-      //         var dealer = result[0]['dealer'];
-      //         var dealerArray = $.cookie('dealers') ? $.cookie('dealers') : [];
-      //         dealerArray.push(dealer);
-      //         $.cookie('dealers', dealerArray, { expires: 30, path: '/' });
-      //       }
-      //       // IF VELOFIX, UPDATE COOKIE WITH VELOFIX INFO
-      //       if(result[0]['velofix']){
-      //         $.cookie('velofix', true, { expires: 30, path: '/' });
-      //       }
-      //     })
-      //   })
-      // })
-      // .done(function(){
-      //   // renderPurchaseOptions();
-      // });
 
-    ///////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////
     // ELSE IF NUMERIC, QUERY US
     } else {
       $.getJSON( "https://secure.geonames.net/findNearbyPostalCodesJSON?country=us&radius=16&username=spotbrand&postalcode=" + postcode)
-        .then(function(data) {
+      .catch(function(err){
+        console.log("Please enter a valid postal code");
+      })
+      .then(function(data) {
           // GET ARRAY OF JUST THE POSTAL CODES FROM THE API DATA
           var postalCodes = [];
           for (var i = 0; i < data.postalCodes.length; i++) {
             postalCodes.push(data.postalCodes[i]['postalCode']);
           }
-          console.log("POSTAL CODES from geonames api call: ", postalCodes);
           return postalCodes;
         })
         .then(function(postalCodeArray){
