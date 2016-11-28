@@ -84,6 +84,10 @@ $(document).ready(function(){
       })
       .then(function(data) {
         // GET ARRAY OF JUST THE POSTAL CODES FROM THE API DATA
+        if(data.status.message){
+          console.log(data.status.message);
+          return
+        }
         console.log("DATA: ", data);
         var postalCodes = [];
         // for (var i = 0; i < data.postalCodes.length; i++) {
