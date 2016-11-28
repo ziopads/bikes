@@ -82,7 +82,7 @@ $(document).ready(function(){
         var string = $.cookie('selectedDeliveryOption');
         // var selector = 'li:contains("' + string + '")'
         $('li:contains("' + string + '")').addClass('selected').css('color', '#004cff');
-        $('#hiddenDeliveryOption').text(selected);
+        $('#hiddenDeliveryOption').text(string);
       }
     }
   }
