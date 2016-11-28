@@ -81,7 +81,7 @@ $(document).ready(function(){
 
         var string = $.cookie('selectedDeliveryOption');
         console.log("STRING: ", string);
-        var target = $('li:contains(string)');
+        var target = $('#postcode_results li:contains(string)');
         console.log("TARGET: ", target);
         // .addClass('selected').css('color', '#004cff');
       }
