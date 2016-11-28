@@ -47,7 +47,6 @@ $(document).ready(function(){
   function renderPurchaseOptions(){
     // FIRST, DELETE ANY EXISTING LIST ITEMS
     $('#postcode_results').empty();
-    console.log('postcode_results: ', $('#postcode_results'));
 
     // IF !DEALER && !VELOFIX, SHOW PRODELIVERY_NO, HIDE PRODELIVERY_YES
     if($.cookie('velofix') === 'false' && $.cookie('dealers') === ''){
@@ -83,8 +82,7 @@ $(document).ready(function(){
 
         var string = $.cookie('selectedDeliveryOption');
         // console.log("STRING: ", string);
-        $('li:contains("string")').addClass('selected')
-        // .css('color', '#004cff');
+        $('li:contains("'string'")').addClass('selected').css('color', '#004cff');
         // console.log("TARGET: ", target);
         //
       }
