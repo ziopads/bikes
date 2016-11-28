@@ -1,4 +1,11 @@
 $(document).ready(function(){
+  // $(document).keypress(
+  //   function(event){
+  //    if (event.which == '13') {
+  //       event.preventDefault();
+  //     }
+  // });
+
   $('#prodelivery_loading').hide();
   $('#prodelivery_yes').hide();
   $('#prodelivery_no').hide();
@@ -6,7 +13,6 @@ $(document).ready(function(){
   // EVENTHANDLER FOR POSTCODE SEARCH BUTTON
   ///////////////////////////////////////////////////////////////////////
   $('#postcode_search').on('click', function(){
-    event.preventDefault();
     $('#hiddenDeliveryOption').empty();
     $('#prodelivery_yes').hide();
     $('#prodelivery_no').hide();
