@@ -6,6 +6,7 @@ $(document).ready(function(){
   // EVENTHANDLER FOR POSTCODE SEARCH BUTTON
   ///////////////////////////////////////////////////////////////////////
   $('#postcode_search').on('click', function(){
+    $('#hiddenDeliveryOption').empty();
     $('#prodelivery_yes').hide();
     $('#prodelivery_no').hide();
     $('#prodelivery_loading').show();
@@ -29,8 +30,8 @@ $(document).ready(function(){
     var selected = $(this).text();
     console.log("SELECTED VARIABLE: ", selected);
     // $.cookie('selectedDeliveryOption', JSON.stringify(selected), { expires: 30, path: '/' })
-    $.cookie('selectedDeliveryOption', selected, { expires: 30, path: '/' })
-    $('#hiddenDeliveryOption').text(selected)
+    $.cookie('selectedDeliveryOption', selected, { expires: 30, path: '/' });
+    $('#hiddenDeliveryOption').text(selected);
   })
 
   ///////////////////////////////////////////////////////////////////////
