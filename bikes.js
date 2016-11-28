@@ -20,7 +20,7 @@ $(document).ready(function(){
   ///////////////////////////////////////////////////////////////////////
   $('#postcode_results').on('click', 'li', function(e){
     $('li.selected').removeClass('selected');
-    $(this).addClass('selected');
+    $(this).addClass('selected').css('color', 'blue');
     var selected = $(this).text();
     $.cookie('selectedDeliveryOption', JSON.stringify(selected), { expires: 30, path: '/' })
     $('#hiddenDeliveryOption').text(selected)
@@ -42,6 +42,9 @@ $(document).ready(function(){
     $('#postcode_results').empty();
 
     // IF !DEALER && !VELOFIX, SHOW PRODELIVERY_NO, HIDE PRODELIVERY_YES
+    if($.cookie('velofix')){
+      console.log("THIS SHOULDN'T HAVE LOGGED");
+    }
     if($.cookie('velofix') === false && !$.cookie('dealers')){
       $('#prodelivery_no').show();
       $('#prodelivery_yes').hide();
