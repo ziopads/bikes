@@ -65,9 +65,10 @@ $(document).ready(function(){
       var dealerOptionsFromCookie = $.cookie('dealers');
       console.log("dealerOptionsFromCookie: ", dealerOptionsFromCookie);
       if(dealerOptionsFromCookie.length){
-        // for (var i = 0; i < dealerOptionsFromCookie.length; i++) {
-          deliveryOptions.push(dealerOptionsFromCookie);
-        // }
+        var arrayFromCookieDealer = dealerOptionsFromCookie.split(',');
+        for (var i = 0; i < arrayFromCookieDealer.length; i++) {
+          deliveryOptions.push(arrayFromCookieDealer[i]);
+        }
       }
       console.log("deliveryOptions: ", deliveryOptions);
       if($.cookie('velofix') === true){
@@ -75,13 +76,12 @@ $(document).ready(function(){
       }
       console.log("deliveryOptions after velofix: ", deliveryOptions);
 
-      deliveryOptions.push('Mail it to me');
+      // deliveryOptions.push('Mail it to me');
       for (var i = 0; i < deliveryOptions.length; i++) {
         $('#postcode_results').append($('<li>' + deliveryOptions[i] + '</li>'));
       }
       if($.cookie('selectedDeliveryOption')){
         var string = $.cookie('selectedDeliveryOption');
-        // var selector = 'li:contains("' + string + '")'
         $('li:contains("' + string + '")').addClass('selected').css('color', '#004cff');
         $('#hiddenDeliveryOption').text(string);
       }
