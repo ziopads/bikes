@@ -257,7 +257,7 @@ $(document).ready(function(){
   function postcodeLookup(postcode){
     var country = isNaN(postcode) ? "ca": "us";
     console.log(country, postcode);
-    $.getJSON( "https://secure.geonames.net/findNearbyPostalCodesJSON?country=" + country + "&radius=16&maxRows=40&username=spotbrand&postalcode=" + postcode)
+    $.getJSON( "https://secure.geonames.net/findNearbyPostalCodesJSON?country=" + country + "&radius=16&maxRows=20&username=spotbrand&postalcode=" + postcode)
       .catch(function(err){
         console.log("Please enter a valid postal code");
       })
@@ -292,7 +292,7 @@ $(document).ready(function(){
       })
       .then(function(data){
         console.log("THE TIME IS NOW: ", data);
-        return $.getJSON( "https://secure.geonames.net/findNearbyPostalCodesJSON?country=" + country + "&radius=160&maxRows=20&username=spotbrand&postalcode=" + postcode)
+        return $.getJSON( "https://secure.geonames.net/findNearbyPostalCodesJSON?country=" + country + "&radius=160&maxRows=40&username=spotbrand&postalcode=" + postcode)
             .catch(function(err){
               console.log("Please enter a valid postal code");
             })
