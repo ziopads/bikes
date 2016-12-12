@@ -283,6 +283,7 @@ $(document).ready(function(){
             }
             $.cookie('dealers', dealerArray, { expires: 30, path: '/' });
             console.log("brendan");
+            return "wes";
           })
           .catch(function(err){
             console.log("ERROR: ", err);
