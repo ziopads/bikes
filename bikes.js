@@ -266,7 +266,7 @@ $(document).ready(function(){
       })
       .then(function(postalCodeArray){
         if(!postalCodeArray){
-          return "brendan";
+          return {};
         }
         // CREATE AN ARRAY OF PROMISES FOR SECOND API CALL
         var arrayOfPromises = postalCodeArray.map(fetchDealers);
@@ -289,7 +289,7 @@ $(document).ready(function(){
           })
           return "brendan";
       })
-      .then(function(){
+      .then(function(data){
         console.log("THE TIME IS NOW");
         $.getJSON( "https://secure.geonames.net/findNearbyPostalCodesJSON?country=" + country + "&radius=160&maxRows=20&username=spotbrand&postalcode=" + postcode)
             .catch(function(err){
