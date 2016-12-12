@@ -44,7 +44,6 @@ $(document).ready(function(){
     $('#hiddenDeliveryOption').empty();
     showProdeliveryLoading();
     var postcode = $('#postcode').val();
-    console.log("postcode: ", postcode);
     $.cookie.raw = true;
     $.cookie('postcode', postcode, { expires: 30, path: '/' });
     $.cookie('dealers', [], { expires: 30, path: '/' });
