@@ -292,7 +292,7 @@ $(document).ready(function(){
       })
       .then(function(data){
         console.log("THE TIME IS NOW: ", data);
-        $.getJSON( "https://secure.geonames.net/findNearbyPostalCodesJSON?country=" + country + "&radius=160&maxRows=20&username=spotbrand&postalcode=" + postcode)
+        return $.getJSON( "https://secure.geonames.net/findNearbyPostalCodesJSON?country=" + country + "&radius=160&maxRows=20&username=spotbrand&postalcode=" + postcode)
             .catch(function(err){
               console.log("Please enter a valid postal code");
             })
