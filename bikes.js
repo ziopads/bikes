@@ -383,6 +383,7 @@ $(document).ready(function(){
               }
             }
             $.cookie('dealers', dealerArray, { expires: 30, path: '/' });
+            console.log("brendan");
             return "brendan";
           })
           .catch(function(err){
