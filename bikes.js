@@ -283,12 +283,12 @@ $(document).ready(function(){
             }
             $.cookie('dealers', dealerArray, { expires: 30, path: '/' });
             console.log("brendan");
-            return "wes";
+            // return "wes";
           })
           .catch(function(err){
             console.log("ERROR: ", err);
           })
-          return "brendan";
+          // return "brendan";
       })
       .then(function(data){
         console.log("THE TIME IS NOW: ", data);
@@ -319,15 +319,15 @@ $(document).ready(function(){
                       // }
                     }
                   }
-                  return "1"
+                  // return "1"
                   // $.cookie('dealers', dealerArray, { expires: 30, path: '/' });
                 })
                 .catch(function(err){
                   console.log("ERROR: ", err);
                 })
-                return "2";
+                // return "2";
             })
-            return "3";
+            // return "3";
       })
       .then(function(data){
         console.log("RENDERING: ", data);
