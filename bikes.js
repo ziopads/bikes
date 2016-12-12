@@ -35,24 +35,6 @@ $(document).ready(function(){
   //   }
   // });
 
-  // ///////////////////////////////////////////////////////////////////////
-  // // EVENTHANDLER FOR POSTCODE SEARCH BUTTON
-  // ///////////////////////////////////////////////////////////////////////
-  // $('#postcode_search').on('click', function(){
-  //   $('#hiddenDeliveryOption').empty();
-  //   $('#prodelivery_yes').hide();
-  //   $('#prodelivery_no').hide();
-  //   $('#prodelivery_loading').show();
-  //   var postcode = $('#postcode').val();
-  //   $.cookie.raw = true;
-  //   $.cookie('postcode', postcode, { expires: 30, path: '/' });
-  //   $.cookie('dealers', [], { expires: 30, path: '/' });
-  //   $.cookie('velofix', false, { expires: 30, path: '/' });
-  //   $.cookie('deliveryOption', '', { expires: 30, path: '/' });
-  //   $.cookie('selectedDeliveryOption', '', { expires: 30, path: '/' });
-  //   postcodeLookup(postcode);
-  // });
-
   ///////////////////////////////////////////////////////////////////////
   // EVENTHANDLER FOR POSTCODE SEARCH BUTTON
   ///////////////////////////////////////////////////////////////////////
@@ -92,7 +74,6 @@ $(document).ready(function(){
       showProdelivery_yes();
       var deliveryOptions = [];
       var dealerOptionsFromCookie = $.cookie('dealers');
-      // console.log("dealerOptionsFromCookie: ", dealerOptionsFromCookie);
       if(dealerOptionsFromCookie.length){
         var arrayFromCookieDealer = dealerOptionsFromCookie.split(',');
         for (var i = 0; i < arrayFromCookieDealer.length; i++) {
@@ -128,235 +109,24 @@ $(document).ready(function(){
     $('#postcode li.selected').removeClass('selected');
     $(this).addClass('selected').css('color', '#004cff');
     var selected = $(this).text();
-    console.log("SELECTED VARIABLE: ", selected);
-    // $.cookie('selectedDeliveryOption', JSON.stringify(selected), { expires: 30, path: '/' })
     $.cookie('selectedDeliveryOption', selected, { expires: 30, path: '/' });
     $('#hiddenDeliveryOption').text(selected);
   })
 
-
-                                                                                // //////////////////////////////////////////////////////////////////////
-                                                                                // // FUNCTION TO PERFORM POSTCODE LOOKUP
-                                                                                // //////////////////////////////////////////////////////////////////////
-                                                                                // function postcodeLookup(postcode) {
-                                                                                //   // var postalCodes = []
-                                                                                //   // IF !NUMERIC, QUERY CANADA
-                                                                                //   if(isNaN(postcode)){
-                                                                                //     $.getJSON( "https://secure.geonames.net/findNearbyPostalCodesJSON?country=ca&radius=16&maxRows=20&username=spotbrand&postalcode=" + postcode)
-                                                                                //     .catch(function(err){
-                                                                                //       console.log("Please enter a valid postal code");
-                                                                                //     })
-                                                                                //     .then(function(data) {
-                                                                                //       // GET ARRAY OF JUST THE POSTAL CODES FROM THE API DATA
-                                                                                //       if(!data.postalCodes){
-                                                                                //         console.log(data.status.message);
-                                                                                //         $.cookie('postcode', '', { expires: 30, path: '/' });
-                                                                                //         return false;
-                                                                                //       }
-                                                                                //       var postalCodes = [];
-                                                                                //       for (var i = 0; i < data.postalCodes.length; i++) {
-                                                                                //         postalCodes.push(data.postalCodes[i]['postalCode']);
-                                                                                //       }
-                                                                                //       return postalCodes;
-                                                                                //     })
-                                                                                //     .then(function(postalCodeArray){
-                                                                                //       if(!postalCodeArray){
-                                                                                //         return false;
-                                                                                //       }
-                                                                                //       // CREATE AN ARRAY OF PROMISES FOR SECOND API CALL
-                                                                                //       var arrayOfPromises = postalCodeArray.map(fetchDeliveryInfo);
-                                                                                //       return Promise.all(arrayOfPromises)
-                                                                                //         .then(function(arrayOfValuesOrErrors){
-                                                                                //           var dealerArray = [];
-                                                                                //           for (var i = 0; i < arrayOfValuesOrErrors.length; i++) {
-                                                                                //             if(arrayOfValuesOrErrors[i]){
-                                                                                //               var dealer = arrayOfValuesOrErrors[i][0]['dealer'];
-                                                                                //               if(dealer === 'velofix'){
-                                                                                //                 $.cookie('velofix', true, { expires: 30, path: '/' });
-                                                                                //               } else {
-                                                                                //                 dealerArray.push(dealer);
-                                                                                //               }
-                                                                                //             }
-                                                                                //           }
-                                                                                //           $.cookie('dealers', dealerArray, { expires: 30, path: '/' });
-                                                                                //           renderPurchaseOptions();
-                                                                                //         })
-                                                                                //         .catch(function(err){
-                                                                                //           console.log("ERROR: ", err);
-                                                                                //         })
-                                                                                //     });
-                                                                                //
-                                                                                //   // ELSE IF NUMERIC, QUERY US
-                                                                                //   } else {
-                                                                                //     $.getJSON( "https://secure.geonames.net/findNearbyPostalCodesJSON?country=us&radius=16&maxRows=20&username=spotbrand&postalcode=" + postcode)
-                                                                                //     .catch(function(err){
-                                                                                //       console.log("Please enter a valid postal code");
-                                                                                //     })
-                                                                                //     .then(function(data) {
-                                                                                //       console.log(data);
-                                                                                //         // GET ARRAY OF JUST THE POSTAL CODES FROM THE API DATA
-                                                                                //         if(!data.postalCodes){
-                                                                                //           console.log(data.status.message);
-                                                                                //           $.cookie('postcode', '', { expires: 30, path: '/' });
-                                                                                //           return false;
-                                                                                //         }
-                                                                                //         var postalCodes = [];
-                                                                                //         for (var i = 0; i < data.postalCodes.length; i++) {
-                                                                                //           postalCodes.push(data.postalCodes[i]['postalCode']);
-                                                                                //         }
-                                                                                //         console.log(postalCodes);
-                                                                                //         return postalCodes;
-                                                                                //       })
-                                                                                //       .then(function(postalCodeArray){
-                                                                                //         if(!postalCodeArray){
-                                                                                //           return false;
-                                                                                //         }
-                                                                                //         // CREATE AN ARRAY OF PROMISES FOR SECOND API CALL
-                                                                                //         var arrayOfPromises = postalCodeArray.map(fetchDeliveryInfo);
-                                                                                //         return Promise.all(arrayOfPromises)
-                                                                                //           .then(function(arrayOfValuesOrErrors){
-                                                                                //             var dealerArray = [];
-                                                                                //             for (var i = 0; i < arrayOfValuesOrErrors.length; i++) {
-                                                                                //               if(arrayOfValuesOrErrors[i]){
-                                                                                //                 var dealer = arrayOfValuesOrErrors[i][0]['dealer'];
-                                                                                //                 if(dealer === 'velofix'){
-                                                                                //                   $.cookie('velofix', true, { expires: 30, path: '/' });
-                                                                                //                 } else {
-                                                                                //                   dealerArray.push(dealer);
-                                                                                //                 }
-                                                                                //               }
-                                                                                //             }
-                                                                                //             $.cookie('dealers', dealerArray, { expires: 30, path: '/' });
-                                                                                //             renderPurchaseOptions();
-                                                                                //           })
-                                                                                //           .catch(function(err){
-                                                                                //             console.log("ERROR: ", err);
-                                                                                //           })
-                                                                                //       });
-                                                                                //   }
-                                                                                // }
-  // /////////////////////////////////////////////////////////////////////////
-  // // FUNCTION TO FIND DEALERSHIP POSTAL CODES
-  // /////////////////////////////////////////////////////////////////////////
-  // function postcodeLookup(postcode){
-  //   var country = isNaN(postcode) ? "ca": "us";
-  //   console.log(country, postcode);
-  //   // return Promise.all([getDealers(country, postcode), getVelofix(country, postcode)])
-  //   return Promise.all([getDealers(country, postcode)])
-  //     .then(function(){
-  //       console.log("WE MADE IT");
-  //       // renderPurchaseOptions()
-  //     })
-  //     .catch(function(err){
-  //       console.log("Promise.all error at highest level: ", err);
-  //     })
-  // }
+  /////////////////////////////////////////////////////////////////////////
+  // FUNCTION TO FIND DEALERSHIP POSTAL CODES
+  /////////////////////////////////////////////////////////////////////////
   function postcodeLookup(postcode){
     var country = isNaN(postcode) ? "ca": "us";
     return Promise.all([getDealers(country, postcode), getVelofix(country, postcode)])
     .then(function(){
       renderPurchaseOptions()
-    });
+    })
   }
 
-
-                                                                                // /////////////////////////////////////////////////////////////////////////
-                                                                                // // FUNCTION TO FIND DEALERSHIP POSTAL CODES
-                                                                                // /////////////////////////////////////////////////////////////////////////
-                                                                                // function postcodeLookup(postcode){
-                                                                                //   var country = isNaN(postcode) ? "ca": "us";
-                                                                                //   console.log(country, postcode);
-                                                                                //   $.getJSON( "https://secure.geonames.net/findNearbyPostalCodesJSON?country=" + country + "&radius=16&maxRows=20&username=spotbrand&postalcode=" + postcode)
-                                                                                //     .catch(function(err){
-                                                                                //       console.log("Please enter a valid postal code");
-                                                                                //     })
-                                                                                //     .then(function(data){
-                                                                                //       return getArrayOfPostcodes(data);
-                                                                                //     })
-                                                                                //     .then(function(postalCodeArray){
-                                                                                //       if(!postalCodeArray){
-                                                                                //         return {};
-                                                                                //       }
-                                                                                //       // CREATE AN ARRAY OF PROMISES FOR SECOND API CALL
-                                                                                //       var arrayOfPromises = postalCodeArray.map(fetchDealers);
-                                                                                //       console.log("arrayOfPromises: ", arrayOfPromises);
-                                                                                //       return Promise.all(arrayOfPromises)
-                                                                                //         .then(function(arrayOfValuesOrErrors){
-                                                                                //           console.log("arrayOfValuesOrErrors: ", arrayOfValuesOrErrors);
-                                                                                //           var dealerArray = [];
-                                                                                //           for (var i = 0; i < arrayOfValuesOrErrors.length; i++) {
-                                                                                //             if(arrayOfValuesOrErrors[i]){
-                                                                                //               var dealer = arrayOfValuesOrErrors[i][0]['dealer'];
-                                                                                //               dealerArray.push(dealer);
-                                                                                //             }
-                                                                                //           }
-                                                                                //           $.cookie('dealers', dealerArray, { expires: 30, path: '/' });
-                                                                                //           console.log("brendan");
-                                                                                //           // return "wes";
-                                                                                //         })
-                                                                                //         .catch(function(err){
-                                                                                //           console.log("ERROR: ", err);
-                                                                                //         })
-                                                                                //         // return "brendan";
-                                                                                //     })
-                                                                                //     .then(function(data){
-                                                                                //       console.log("THE TIME IS NOW: ", data);
-                                                                                //       return $.getJSON( "https://secure.geonames.net/findNearbyPostalCodesJSON?country=" + country + "&radius=160&maxRows=40&username=spotbrand&postalcode=" + postcode)
-                                                                                //           .catch(function(err){
-                                                                                //             console.log("Please enter a valid postal code");
-                                                                                //           })
-                                                                                //           .then(function(data){
-                                                                                //             console.log("velofix postcodes: ", data);
-                                                                                //             return getArrayOfPostcodes(data);
-                                                                                //           })
-                                                                                //           .then(function(postalCodeArray){
-                                                                                //             console.log("postalCodeArray for velofix: ", postalCodeArray);
-                                                                                //             if(!postalCodeArray){
-                                                                                //               return false;
-                                                                                //             }
-                                                                                //             // CREATE AN ARRAY OF PROMISES FOR SECOND API CALL
-                                                                                //             var arrayOfPromises = postalCodeArray.map(fetchVelofix);
-                                                                                //             console.log("arrayOfPromises: ", arrayOfPromises);
-                                                                                //             return Promise.all(arrayOfPromises)
-                                                                                //               .then(function(arrayOfValuesOrErrors){
-                                                                                //                 console.log(arrayOfValuesOrErrors);
-                                                                                //                 for (var i = 0; i < arrayOfValuesOrErrors.length; i++) {
-                                                                                //                   if(arrayOfValuesOrErrors[i]){
-                                                                                //                     // var dealer = arrayOfValuesOrErrors[i][0]['dealer'];
-                                                                                //                     // if(dealer === 'velofix'){
-                                                                                //                       $.cookie('velofix', true, { expires: 30, path: '/' });
-                                                                                //                     // }
-                                                                                //                   }
-                                                                                //                 }
-                                                                                //                 // return "1"
-                                                                                //                 // $.cookie('dealers', dealerArray, { expires: 30, path: '/' });
-                                                                                //               })
-                                                                                //               .catch(function(err){
-                                                                                //                 console.log("ERROR: ", err);
-                                                                                //               })
-                                                                                //               // return "2";
-                                                                                //           })
-                                                                                //           // return "3";
-                                                                                //     })
-                                                                                //     .then(function(data){
-                                                                                //       console.log("RENDERING: ", data);
-                                                                                //       renderPurchaseOptions();
-                                                                                //     })
-                                                                                // }
-
-  // /////////////////////////////////////////////////////////////////////////
-  // // FUNCTION TO FETCH DELIVERY INFO (SECOND API CALL)
-  // /////////////////////////////////////////////////////////////////////////
-  // function fetchDeliveryInfo(postcode){
-  //   return $.getJSON("https://spotbrand.com/prodelivery/query.php?postcode=" + postcode)
-  //     .catch(error => Promise.resolve({}))
-  //     .then(function(data){
-  //       if(!data[0]){
-  //         return;
-  //       }
-  //       return data;
-  //     })
-  // }
+  /////////////////////////////////////////////////////////////////////////
+  // FUNCTION TO FETCH DELIVERY INFO (SECOND API CALL)
+  /////////////////////////////////////////////////////////////////////////
   function getArrayOfPostcodes(data){
     if(!data.postalCodes){
       console.log(data.status.message);
@@ -374,7 +144,6 @@ $(document).ready(function(){
   /////////////////////////////////////////////////////////////////////////
   // GET DEALERS
   /////////////////////////////////////////////////////////////////////////
-
   function getDealers(country, postcode){
     return $.getJSON( "https://secure.geonames.net/findNearbyPostalCodesJSON?country=" + country + "&radius=16&maxRows=40&username=spotbrand&postalcode=" + postcode)
       .catch(function(err){
@@ -389,33 +158,26 @@ $(document).ready(function(){
         }
         // CREATE AN ARRAY OF PROMISES FOR SECOND API CALL
         var arrayOfPromises = postalCodeArray.map(fetchDealers);
-        console.log("arrayOfPromises: ", arrayOfPromises);
         return Promise.all(arrayOfPromises)
           .then(function(arrayOfValuesOrErrors){
-            console.log("arrayOfValuesOrErrors: ", arrayOfValuesOrErrors);
             var dealerArray = [];
             for (var i = 0; i < arrayOfValuesOrErrors.length; i++) {
-              // console.log(arrayOfValuesOrErrors[i]);
               if(arrayOfValuesOrErrors[i]){
                 var dealer = arrayOfValuesOrErrors[i][0]['dealer'];
                 dealerArray.push(dealer);
               }
             }
             $.cookie('dealers', dealerArray, { expires: 30, path: '/' });
-            console.log("brendan");
-            return "brendan";
           })
           .catch(function(err){
             console.log("ERROR: ", err);
           })
-          return "wes";
       })
   }
 
   /////////////////////////////////////////////////////////////////////////
   // GET VELOFIX
   /////////////////////////////////////////////////////////////////////////
-
   function getVelofix(country, postcode){
     return $.getJSON( "https://secure.geonames.net/findNearbyPostalCodesJSON?country=" + country + "&radius=160&maxRows=40&username=spotbrand&postalcode=" + postcode)
       .catch(function(err){
@@ -425,31 +187,22 @@ $(document).ready(function(){
         return getArrayOfPostcodes(data);
       })
       .then(function(postalCodeArray){
-        console.log("postalCodeArray for velofix: ", postalCodeArray);
         if(!postalCodeArray){
           return false;
         }
         // CREATE AN ARRAY OF PROMISES FOR SECOND API CALL
         var arrayOfPromises = postalCodeArray.map(fetchVelofix);
-        console.log("arrayOfPromises: ", arrayOfPromises);
         return Promise.all(arrayOfPromises)
           .then(function(arrayOfValuesOrErrors){
-            console.log(arrayOfValuesOrErrors);
             for (var i = 0; i < arrayOfValuesOrErrors.length; i++) {
               if(arrayOfValuesOrErrors[i]){
-                // var dealer = arrayOfValuesOrErrors[i][0]['dealer'];
-                // if(dealer === 'velofix'){
-                  $.cookie('velofix', true, { expires: 30, path: '/' });
-                // }
+                $.cookie('velofix', true, { expires: 30, path: '/' });
               }
             }
-            // return "1"
-            // $.cookie('dealers', dealerArray, { expires: 30, path: '/' });
           })
           .catch(function(err){
             console.log("ERROR: ", err);
           })
-          // return "2";
       })
   }
 
@@ -481,32 +234,4 @@ $(document).ready(function(){
       })
   }
   /////////////////////////////////////////////////////////////////////////
-
-
-  // .then(function(postalCodeArray){
-  //   if(!postalCodeArray){
-  //     return false;
-  //   }
-  //   // CREATE AN ARRAY OF PROMISES FOR SECOND API CALL
-  //   var arrayOfPromises = postalCodeArray.map(fetchDeliveryInfo);
-  //   return Promise.all(arrayOfPromises)
-  //     .then(function(arrayOfValuesOrErrors){
-  //       var dealerArray = [];
-  //       for (var i = 0; i < arrayOfValuesOrErrors.length; i++) {
-  //         if(arrayOfValuesOrErrors[i]){
-  //           var dealer = arrayOfValuesOrErrors[i][0]['dealer'];
-  //           if(dealer === 'velofix'){
-  //             $.cookie('velofix', true, { expires: 30, path: '/' });
-  //           } else {
-  //             dealerArray.push(dealer);
-  //           }
-  //         }
-  //       }
-  //       $.cookie('dealers', dealerArray, { expires: 30, path: '/' });
-  //       renderPurchaseOptions();
-  //     })
-  //     .catch(function(err){
-  //       console.log("ERROR: ", err);
-  //     })
-
 })
