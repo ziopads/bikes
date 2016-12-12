@@ -247,7 +247,8 @@ $(document).ready(function(){
     // return Promise.all([getDealers(country, postcode), getVelofix(country, postcode)])
     return Promise.all([getDealers(country, postcode)])
       .then(function(){
-        renderPurchaseOptions()
+        console.log("WE MADE IT");
+        // renderPurchaseOptions()
       })
       .catch(function(err){
         console.log("Promise.all error at highest level: ", err);
