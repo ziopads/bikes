@@ -290,7 +290,7 @@ $(document).ready(function(){
           return "brendan";
       })
       .then(function(data){
-        console.log("THE TIME IS NOW");
+        console.log("THE TIME IS NOW: ", data);
         $.getJSON( "https://secure.geonames.net/findNearbyPostalCodesJSON?country=" + country + "&radius=160&maxRows=20&username=spotbrand&postalcode=" + postcode)
             .catch(function(err){
               console.log("Please enter a valid postal code");
@@ -318,14 +318,17 @@ $(document).ready(function(){
                       // }
                     }
                   }
+                  return "1"
                   // $.cookie('dealers', dealerArray, { expires: 30, path: '/' });
                 })
                 .catch(function(err){
                   console.log("ERROR: ", err);
                 })
+                return "2";
             })
       })
-      .then(function(){
+      .then(function(data){
+        console.log("RENDERING: ", data);
         renderPurchaseOptions();
       })
   }
