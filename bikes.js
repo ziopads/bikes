@@ -295,6 +295,39 @@ $(document).ready(function(){
           console.log("wes");
           return "wes";
       })
+      .then(function(){
+        console.log("THE TIME IS NOW");
+      //   $.getJSON( "https://secure.geonames.net/findNearbyPostalCodesJSON?country=" + country + "&radius=160&maxRows=20&username=spotbrand&postalcode=" + postcode)
+      //       .catch(function(err){
+      //         console.log("Please enter a valid postal code");
+      //       })
+      //       .then(function(data){
+      //         return getArrayOfPostcodes(data);
+      //       })
+      //       .then(function(postalCodeArray){
+      //         if(!postalCodeArray){
+      //           return false;
+      //         }
+      //         // CREATE AN ARRAY OF PROMISES FOR SECOND API CALL
+      //         var arrayOfPromises = postalCodeArray.map(fetchVelofix);
+      //         console.log("arrayOfPromises: ", arrayOfPromises);
+      //         return Promise.all(arrayOfPromises)
+      //           .then(function(arrayOfValuesOrErrors){
+      //             var dealerArray = [];
+      //             for (var i = 0; i < arrayOfValuesOrErrors.length; i++) {
+      //               console.log(arrayOfValuesOrErrors[i]);
+      //               if(arrayOfValuesOrErrors[i]){
+      //                 var dealer = arrayOfValuesOrErrors[i][0]['dealer'];
+      //                 dealerArray.push(dealer);
+      //               }
+      //             }
+      //             $.cookie('dealers', dealerArray, { expires: 30, path: '/' });
+      //           })
+      //           .catch(function(err){
+      //             console.log("ERROR: ", err);
+      //           })
+      //       })
+      })
   }
   //                                                                               $.getJSON( "https://secure.geonames.net/findNearbyPostalCodesJSON?country=" + country + "&radius=16&maxRows=20&username=spotbrand&postalcode=" + postcode)
   //                                                                                 .catch(function(err){
