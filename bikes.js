@@ -246,7 +246,9 @@ $(document).ready(function(){
     console.log(country, postcode);
     // return Promise.all([getDealers(country, postcode), getVelofix(country, postcode)])
     return Promise.all([getDealers(country, postcode)])
-      .then(renderPurchaseOptions())
+      .then(function(){
+        renderPurchaseOptions()
+      })
       .catch(function(err){
         console.log("Promise.all error at highest level: ", err);
       })
@@ -338,7 +340,7 @@ $(document).ready(function(){
   /////////////////////////////////////////////////////////////////////////
 
   function getDealers(country, postcode){
-    $.getJSON( "https://secure.geonames.net/findNearbyPostalCodesJSON?country=" + country + "&radius=16&maxRows=20&username=spotbrand&postalcode=" + postcode)
+    $.getJSON( "https://secure.geonames.net/findNearbyPostalCodesJSON?country=" + country + "&radius=16&maxRows=40&username=spotbrand&postalcode=" + postcode)
       .fail(function(err){
         console.log("Please enter a valid postal code");
       })
@@ -357,7 +359,7 @@ $(document).ready(function(){
             console.log("arrayOfValuesOrErrors: ", arrayOfValuesOrErrors);
             var dealerArray = [];
             for (var i = 0; i < arrayOfValuesOrErrors.length; i++) {
-              console.log(arrayOfValuesOrErrors[i]);
+              // console.log(arrayOfValuesOrErrors[i]);
               if(arrayOfValuesOrErrors[i]){
                 var dealer = arrayOfValuesOrErrors[i][0]['dealer'];
                 dealerArray.push(dealer);
