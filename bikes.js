@@ -354,6 +354,7 @@ $(document).ready(function(){
         console.log("arrayOfPromises: ", arrayOfPromises);
         return Promise.all(arrayOfPromises)
           .then(function(arrayOfValuesOrErrors){
+            console.log("arrayOfValuesOrErrors: ", arrayOfValuesOrErrors);
             var dealerArray = [];
             for (var i = 0; i < arrayOfValuesOrErrors.length; i++) {
               console.log(arrayOfValuesOrErrors[i]);
