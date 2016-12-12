@@ -356,6 +356,7 @@ $(document).ready(function(){
           .then(function(arrayOfValuesOrErrors){
             var dealerArray = [];
             for (var i = 0; i < arrayOfValuesOrErrors.length; i++) {
+              console.log(arrayOfValuesOrErrors[i]);
               if(arrayOfValuesOrErrors[i]){
                 var dealer = arrayOfValuesOrErrors[i][0]['dealer'];
                 dealerArray.push(dealer);
