@@ -80,11 +80,9 @@ $(document).ready(function(){
           deliveryOptions.push(arrayFromCookieDealer[i]);
         }
       }
-      console.log("deliveryOptions: ", deliveryOptions);
       if($.cookie('velofix') === 'true'){
        deliveryOptions.push('Velofix Delivery');
       }
-      console.log("deliveryOptions after velofix: ", deliveryOptions);
       for (var i = 0; i < deliveryOptions.length; i++) {
         $('#postcode_results').append($('<li>' + deliveryOptions[i] + '</li>'));
       }
@@ -129,7 +127,7 @@ $(document).ready(function(){
   /////////////////////////////////////////////////////////////////////////
   function getArrayOfPostcodes(data){
     if(!data.postalCodes){
-      console.log(data.status.message);
+      // console.log(data.status.message);
       $.cookie('postcode', '', { expires: 30, path: '/' });
       return false;
     }
@@ -137,7 +135,6 @@ $(document).ready(function(){
     for (var i = 0; i < data.postalCodes.length; i++) {
       postalCodes.push(data.postalCodes[i]['postalCode']);
     }
-    console.log(postalCodes);
     return postalCodes;
   }
 
