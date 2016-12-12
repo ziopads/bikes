@@ -100,7 +100,7 @@ $(document).ready(function(){
         }
       }
       console.log("deliveryOptions: ", deliveryOptions);
-      if($.cookie('velofix') === true){
+      if($.cookie('velofix') === 'true'){
        deliveryOptions.push('Velofix Delivery');
       }
       console.log("deliveryOptions after velofix: ", deliveryOptions);
