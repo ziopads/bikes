@@ -286,11 +286,11 @@ $(document).ready(function(){
             }
             $.cookie('dealers', dealerArray, { expires: 30, path: '/' });
             console.log("brendan");
-            return "brendan";
           })
           .catch(function(err){
             console.log("ERROR: ", err);
           })
+          return "brendan";
       })
       .then(function(){
         console.log("THE TIME IS NOW");
