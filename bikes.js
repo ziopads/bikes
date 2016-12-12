@@ -321,7 +321,7 @@ $(document).ready(function(){
                       // }
                     }
                   }
-                  $.cookie('dealers', dealerArray, { expires: 30, path: '/' });
+                  // $.cookie('dealers', dealerArray, { expires: 30, path: '/' });
                 })
                 .catch(function(err){
                   console.log("ERROR: ", err);
