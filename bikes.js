@@ -383,11 +383,12 @@ $(document).ready(function(){
               }
             }
             $.cookie('dealers', dealerArray, { expires: 30, path: '/' });
-            return {};
+            return "brendan";
           })
           .catch(function(err){
             console.log("ERROR: ", err);
           })
+          return "wes";
       })
   }
 
