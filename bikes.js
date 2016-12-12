@@ -339,7 +339,7 @@ $(document).ready(function(){
 
   function getDealers(country, postcode){
     $.getJSON( "https://secure.geonames.net/findNearbyPostalCodesJSON?country=" + country + "&radius=16&maxRows=20&username=spotbrand&postalcode=" + postcode)
-      .catch(function(err){
+      .fail(function(err){
         console.log("Please enter a valid postal code");
       })
       .then(function(data){
@@ -386,7 +386,7 @@ $(document).ready(function(){
           return false;
         }
         // CREATE AN ARRAY OF PROMISES FOR SECOND API CALL
-        var arrayOfPromises = postalCodeArray.map(fetchDealers);
+        var arrayOfPromises = postalCodeArray.map(fetchVelofix);
         console.log("arrayOfPromises: ", arrayOfPromises);
         return Promise.all(arrayOfPromises)
           .then(function(arrayOfValuesOrErrors){
