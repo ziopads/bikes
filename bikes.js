@@ -87,11 +87,8 @@ $(document).ready(function(){
     // FIRST, DELETE ANY EXISTING LIST ITEMS
     $('#postcode_results').empty();
     // IF !DEALER && !VELOFIX, SHOW PRODELIVERY_NO, HIDE PRODELIVERY_YES
-    if($.cookie('velofix') === 'false' && $.cookie('dealers') === ''){
-      showProdelivery_no();
-    }
     // ELSE IF DEALER || VELOFIX, SHOW PRODELIVERY_YES, HIDE PRODELIVERY_NO
-    else if($.cookie('velofix') || $.cookie('dealers')){
+    if($.cookie('velofix') || $.cookie('dealers')){
       showProdelivery_yes();
       var deliveryOptions = [];
       var dealerOptionsFromCookie = $.cookie('dealers');
@@ -102,13 +99,11 @@ $(document).ready(function(){
           deliveryOptions.push(arrayFromCookieDealer[i]);
         }
       }
-      // console.log("deliveryOptions: ", deliveryOptions);
+      console.log("deliveryOptions: ", deliveryOptions);
       if($.cookie('velofix') === true){
        deliveryOptions.push('Velofix Delivery');
       }
-      // console.log("deliveryOptions after velofix: ", deliveryOptions);
-
-      // deliveryOptions.push('Mail it to me');
+      console.log("deliveryOptions after velofix: ", deliveryOptions);
       for (var i = 0; i < deliveryOptions.length; i++) {
         $('#postcode_results').append($('<li>' + deliveryOptions[i] + '</li>'));
       }
@@ -117,6 +112,8 @@ $(document).ready(function(){
         $('li:contains("' + string + '")').addClass('selected').css('color', '#004cff');
         $('#hiddenDeliveryOption').text(string);
       }
+    } else {
+      showProdelivery_no();
     }
   }
 
