@@ -254,7 +254,9 @@ $(document).ready(function(){
   function postcodeLookup(postcode){
     var country = isNaN(postcode) ? "ca": "us";
     return Promise.all([getDealers(country, postcode), getVelofix(country, postcode)])
-    .then(renderPurchaseOptions());
+    .then(function(){
+      renderPurchaseOptions()
+    });
   }
 
 
