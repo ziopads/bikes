@@ -266,7 +266,7 @@ $(document).ready(function(){
       })
       .then(function(postalCodeArray){
         if(!postalCodeArray){
-          return false;
+          return "brendan";
         }
         // CREATE AN ARRAY OF PROMISES FOR SECOND API CALL
         var arrayOfPromises = postalCodeArray.map(fetchDealers);
