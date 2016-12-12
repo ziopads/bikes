@@ -238,6 +238,22 @@ $(document).ready(function(){
                                                                                 //       });
                                                                                 //   }
                                                                                 // }
+  // /////////////////////////////////////////////////////////////////////////
+  // // FUNCTION TO FIND DEALERSHIP POSTAL CODES
+  // /////////////////////////////////////////////////////////////////////////
+  // function postcodeLookup(postcode){
+  //   var country = isNaN(postcode) ? "ca": "us";
+  //   console.log(country, postcode);
+  //   // return Promise.all([getDealers(country, postcode), getVelofix(country, postcode)])
+  //   return Promise.all([getDealers(country, postcode)])
+  //     .then(function(){
+  //       console.log("WE MADE IT");
+  //       // renderPurchaseOptions()
+  //     })
+  //     .catch(function(err){
+  //       console.log("Promise.all error at highest level: ", err);
+  //     })
+  // }
   /////////////////////////////////////////////////////////////////////////
   // FUNCTION TO FIND DEALERSHIP POSTAL CODES
   /////////////////////////////////////////////////////////////////////////
@@ -246,7 +262,7 @@ $(document).ready(function(){
     console.log(country, postcode);
     // return Promise.all([getDealers(country, postcode), getVelofix(country, postcode)])
     return Promise.all([getDealers(country, postcode)])
-      .then(function(){
+      .then(function(data){
         console.log("WE MADE IT");
         // renderPurchaseOptions()
       })
@@ -342,7 +358,7 @@ $(document).ready(function(){
 
   function getDealers(country, postcode){
     $.getJSON( "https://secure.geonames.net/findNearbyPostalCodesJSON?country=" + country + "&radius=16&maxRows=40&username=spotbrand&postalcode=" + postcode)
-      .fail(function(err){
+      .catch(function(err){
         console.log("Please enter a valid postal code");
       })
       .then(function(data){
@@ -367,6 +383,7 @@ $(document).ready(function(){
               }
             }
             $.cookie('dealers', dealerArray, { expires: 30, path: '/' });
+            return {};
           })
           .catch(function(err){
             console.log("ERROR: ", err);
