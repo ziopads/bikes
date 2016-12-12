@@ -327,6 +327,7 @@ $(document).ready(function(){
                 })
                 return "2";
             })
+            return "3";
       })
       .then(function(data){
         console.log("RENDERING: ", data);
