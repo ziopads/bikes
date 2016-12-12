@@ -314,8 +314,11 @@ $(document).ready(function(){
                 .then(function(arrayOfValuesOrErrors){
                   console.log(arrayOfValuesOrErrors);
                   for (var i = 0; i < arrayOfValuesOrErrors.length; i++) {
-                    if(dealer === 'velofix'){
-                      $.cookie('velofix', true, { expires: 30, path: '/' });
+                    if(arrayOfValuesOrErrors[i]){
+                      // var dealer = arrayOfValuesOrErrors[i][0]['dealer'];
+                      // if(dealer === 'velofix'){
+                        $.cookie('velofix', true, { expires: 30, path: '/' });
+                      // }
                     }
                   }
                   $.cookie('dealers', dealerArray, { expires: 30, path: '/' });
