@@ -260,14 +260,40 @@ $(document).ready(function(){
   function postcodeLookup(postcode){
     var country = isNaN(postcode) ? "ca": "us";
     console.log(country, postcode);
-    // return Promise.all([getDealers(country, postcode), getVelofix(country, postcode)])
-    return Promise.all([getDealers(country, postcode)])
-      .then(function(data){
-        console.log("WE MADE IT");
-        // renderPurchaseOptions()
-      })
+    $.getJSON( "https://secure.geonames.net/findNearbyPostalCodesJSON?country=" + country + "&radius=16&maxRows=40&username=spotbrand&postalcode=" + postcode)
       .catch(function(err){
-        console.log("Promise.all error at highest level: ", err);
+        console.log("Please enter a valid postal code");
+      })
+      .then(function(data){
+        return getArrayOfPostcodes(data);
+      })
+      .then(function(postalCodeArray){
+        if(!postalCodeArray){
+          return false;
+        }
+        // CREATE AN ARRAY OF PROMISES FOR SECOND API CALL
+        var arrayOfPromises = postalCodeArray.map(fetchDealers);
+        console.log("arrayOfPromises: ", arrayOfPromises);
+        return Promise.all(arrayOfPromises)
+          .then(function(arrayOfValuesOrErrors){
+            console.log("arrayOfValuesOrErrors: ", arrayOfValuesOrErrors);
+            var dealerArray = [];
+            for (var i = 0; i < arrayOfValuesOrErrors.length; i++) {
+              // console.log(arrayOfValuesOrErrors[i]);
+              if(arrayOfValuesOrErrors[i]){
+                var dealer = arrayOfValuesOrErrors[i][0]['dealer'];
+                dealerArray.push(dealer);
+              }
+            }
+            $.cookie('dealers', dealerArray, { expires: 30, path: '/' });
+            console.log("brendan");
+            return "brendan";
+          })
+          .catch(function(err){
+            console.log("ERROR: ", err);
+          })
+          console.log("wes");
+          return "wes";
       })
   }
   //                                                                               $.getJSON( "https://secure.geonames.net/findNearbyPostalCodesJSON?country=" + country + "&radius=16&maxRows=20&username=spotbrand&postalcode=" + postcode)
@@ -352,46 +378,46 @@ $(document).ready(function(){
     return postalCodes;
   }
 
-  /////////////////////////////////////////////////////////////////////////
-  // GET DEALERS
-  /////////////////////////////////////////////////////////////////////////
-
-  function getDealers(country, postcode){
-    $.getJSON( "https://secure.geonames.net/findNearbyPostalCodesJSON?country=" + country + "&radius=16&maxRows=40&username=spotbrand&postalcode=" + postcode)
-      .catch(function(err){
-        console.log("Please enter a valid postal code");
-      })
-      .then(function(data){
-        return getArrayOfPostcodes(data);
-      })
-      .then(function(postalCodeArray){
-        if(!postalCodeArray){
-          return false;
-        }
-        // CREATE AN ARRAY OF PROMISES FOR SECOND API CALL
-        var arrayOfPromises = postalCodeArray.map(fetchDealers);
-        console.log("arrayOfPromises: ", arrayOfPromises);
-        return Promise.all(arrayOfPromises)
-          .then(function(arrayOfValuesOrErrors){
-            console.log("arrayOfValuesOrErrors: ", arrayOfValuesOrErrors);
-            var dealerArray = [];
-            for (var i = 0; i < arrayOfValuesOrErrors.length; i++) {
-              // console.log(arrayOfValuesOrErrors[i]);
-              if(arrayOfValuesOrErrors[i]){
-                var dealer = arrayOfValuesOrErrors[i][0]['dealer'];
-                dealerArray.push(dealer);
-              }
-            }
-            $.cookie('dealers', dealerArray, { expires: 30, path: '/' });
-            console.log("brendan");
-            return "brendan";
-          })
-          .catch(function(err){
-            console.log("ERROR: ", err);
-          })
-          return "wes";
-      })
-  }
+  // /////////////////////////////////////////////////////////////////////////
+  // // GET DEALERS
+  // /////////////////////////////////////////////////////////////////////////
+  //
+  // function getDealers(country, postcode){
+  //   $.getJSON( "https://secure.geonames.net/findNearbyPostalCodesJSON?country=" + country + "&radius=16&maxRows=40&username=spotbrand&postalcode=" + postcode)
+  //     .catch(function(err){
+  //       console.log("Please enter a valid postal code");
+  //     })
+  //     .then(function(data){
+  //       return getArrayOfPostcodes(data);
+  //     })
+  //     .then(function(postalCodeArray){
+  //       if(!postalCodeArray){
+  //         return false;
+  //       }
+  //       // CREATE AN ARRAY OF PROMISES FOR SECOND API CALL
+  //       var arrayOfPromises = postalCodeArray.map(fetchDealers);
+  //       console.log("arrayOfPromises: ", arrayOfPromises);
+  //       return Promise.all(arrayOfPromises)
+  //         .then(function(arrayOfValuesOrErrors){
+  //           console.log("arrayOfValuesOrErrors: ", arrayOfValuesOrErrors);
+  //           var dealerArray = [];
+  //           for (var i = 0; i < arrayOfValuesOrErrors.length; i++) {
+  //             // console.log(arrayOfValuesOrErrors[i]);
+  //             if(arrayOfValuesOrErrors[i]){
+  //               var dealer = arrayOfValuesOrErrors[i][0]['dealer'];
+  //               dealerArray.push(dealer);
+  //             }
+  //           }
+  //           $.cookie('dealers', dealerArray, { expires: 30, path: '/' });
+  //           console.log("brendan");
+  //           return "brendan";
+  //         })
+  //         .catch(function(err){
+  //           console.log("ERROR: ", err);
+  //         })
+  //         return "wes";
+  //     })
+  // }
 
   // /////////////////////////////////////////////////////////////////////////
   // // GET VELOFIX
