@@ -370,10 +370,46 @@ $(document).ready(function(){
   }
 
   /////////////////////////////////////////////////////////////////////////
+  // GET VELOFIX
+  /////////////////////////////////////////////////////////////////////////
+
+  function getDealers(country, postcode){
+    $.getJSON( "https://secure.geonames.net/findNearbyPostalCodesJSON?country=" + country + "&radius=160&maxRows=20&username=spotbrand&postalcode=" + postcode)
+      .catch(function(err){
+        console.log("Please enter a valid postal code");
+      })
+      .then(function(data){
+        return getArrayOfPostcodes(data);
+      })
+      .then(function(postalCodeArray){
+        if(!postalCodeArray){
+          return false;
+        }
+        // CREATE AN ARRAY OF PROMISES FOR SECOND API CALL
+        var arrayOfPromises = postalCodeArray.map(fetchDealers);
+        console.log("arrayOfPromises: ", arrayOfPromises);
+        return Promise.all(arrayOfPromises)
+          .then(function(arrayOfValuesOrErrors){
+            var dealerArray = [];
+            for (var i = 0; i < arrayOfValuesOrErrors.length; i++) {
+              if(arrayOfValuesOrErrors[i]){
+                var dealer = arrayOfValuesOrErrors[i][0]['dealer'];
+                dealerArray.push(dealer);
+              }
+            }
+            $.cookie('dealers', dealerArray, { expires: 30, path: '/' });
+          })
+          .catch(function(err){
+            console.log("ERROR: ", err);
+          })
+      })
+  }
+
+  /////////////////////////////////////////////////////////////////////////
   // FETCH DEALERS
   /////////////////////////////////////////////////////////////////////////
   function fetchDealers(postcode){
-    return $.getJSON("https://spotbrand.com/prodeliver/dealers.php?postcode=" + postcode)
+    return $.getJSON("https://spotbrand.com/prodelivery/dealers.php?postcode=" + postcode)
     .catch(error => Promise.resolve({}))
     .then(function(data){
       if(!data[0]){
