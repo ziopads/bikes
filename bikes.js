@@ -80,7 +80,7 @@ $(document).ready(function(){
   $('#postcode_search').click(search);
 
   function search(){
-    $('#hiddenDeliveryOption').empty();
+    $('#delivery_method').empty();
     showProdeliveryLoading();
     var postcode = $('#postcode').val();
     $.cookie.raw = true;
@@ -89,7 +89,7 @@ $(document).ready(function(){
     $.cookie('velofix', 'false', { expires: 30, path: '/' });
     $.cookie('deliveryOption', '', { expires: 30, path: '/' });
     $.cookie('selectedDeliveryOption', '', { expires: 30, path: '/' });
-    $('#hiddenDeliveryOption').empty();
+    $('#delivery_method').empty();
     postcodeLookup(postcode);
   }
 
@@ -127,7 +127,7 @@ $(document).ready(function(){
       if($.cookie('selectedDeliveryOption')){
         var string = $.cookie('selectedDeliveryOption');
         $('li:contains("' + string + '")').addClass('selected').css('color', '#004cff');
-        $('#hiddenDeliveryOption').text(string);
+        $('#delivery_method').text(string);
       }
     //////////////////////////
     } else if($.cookie('velofix') == 'false' && $.cookie('dealers')){
@@ -139,7 +139,7 @@ $(document).ready(function(){
         showProdelivery_dealer();
         $('.postcode_results').append($('<li class="selected" style="color: #004cff">' + arrayFromCookieDealer[0] + '</li>'));
         $.cookie('selectedDeliveryOption', arrayFromCookieDealer[0], { expires: 30, path: '/' });
-        $('#hiddenDeliveryOption').text(arrayFromCookieDealer[0]);
+        $('#delivery_method').text(arrayFromCookieDealer[0]);
       //////////////////////////
       } else if(arrayFromCookieDealer.length > 1){
         showProdelivery_dealers();
@@ -152,14 +152,13 @@ $(document).ready(function(){
         if($.cookie('selectedDeliveryOption')){
           var string = $.cookie('selectedDeliveryOption');
           $('li:contains("' + string + '")').addClass('selected').css('color', '#004cff');
-          $('#hiddenDeliveryOption').text(string);
+          $('#delivery_method').text(string);
         }
       }
     } else if($.cookie('velofix') == 'true' && $.cookie('dealers') == ''){
       showProdelivery_velofix();
-      // $('.postcode_results').append($('<li>' + "Velofix" + '</li>'));
       $.cookie('selectedDeliveryOption', 'Velofix', { expires: 30, path: '/' });
-      $('#hiddenDeliveryOption').text('Velofix');
+      $('#delivery_method').text('Velofix');
     } else {
       showProdelivery_no();
 
@@ -178,7 +177,7 @@ $(document).ready(function(){
     $(this).addClass('selected').css('color', '#004cff');
     var selected = $(this).text();
     $.cookie('selectedDeliveryOption', selected, { expires: 30, path: '/' });
-    $('#hiddenDeliveryOption').text(selected);
+    $('#delivery_method').text(selected);
   })
 
   /////////////////////////////////////////////////////////////////////////
@@ -220,9 +219,7 @@ $(document).ready(function(){
         return getArrayOfPostcodes(data);
       })
       .then(function(postalCodeArray){
-        // console.log("postalCodeArray: ", postalCodeArray);
         if(!postalCodeArray){
-          // alert("You have no postalCodeArray")
           return false;
         }
         // CREATE AN ARRAY OF PROMISES FOR SECOND API CALL
