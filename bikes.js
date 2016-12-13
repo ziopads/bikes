@@ -139,7 +139,7 @@ $(document).ready(function(){
       if(arrayFromCookieDealer.length == 1){
         console.log("There's only one dealer: ", arrayFromCookieDealer.length);
         showProdelivery_dealer();
-        $('.postcode_results').append($('<li class="selected" color="#004cff">' + arrayFromCookieDealer[0] + '</li>'));
+        $('.postcode_results').append($('<li class="selected" style="color: #004cff">' + arrayFromCookieDealer[0] + '</li>'));
         $.cookie('selectedDeliveryOption', arrayFromCookieDealer[0], { expires: 30, path: '/' });
         $('#hiddenDeliveryOption').text(arrayFromCookieDealer[0]);
       //////////////////////////
@@ -235,6 +235,8 @@ $(document).ready(function(){
             for (var i = 0; i < arrayOfValuesOrErrors.length; i++) {
               if(arrayOfValuesOrErrors[i]){
                 var dealer = arrayOfValuesOrErrors[i][0]['dealer'];
+                // IF THERE ARE MULTIPLE DEALERSHIPS IN THE SAME POSTCODE,
+                // DEAL WITH IT HERE
                 dealerArray.push(dealer);
               }
             }
