@@ -140,7 +140,6 @@ $(document).ready(function(){
       // $('.postcode_results').append($('<li>' + "Velofix" + '</li>'));
       $.cookie('selectedDeliveryOption', 'Velofix', { expires: 30, path: '/' });
       $('#hiddenDeliveryOption').text('Velofix');
-      }
     } else {
       showProdelivery_no();
     }
