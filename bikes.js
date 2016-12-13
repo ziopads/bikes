@@ -92,7 +92,7 @@ $(document).ready(function(){
     // FIRST, DELETE ANY EXISTING LIST ITEMS
     $('.postcode_results').empty();
     //////////////////////////
-    if($.cookie('velofix') && $.cookie('dealers')){
+    if($.cookie('velofix') == 'true' && $.cookie('dealers')){
       console.log("velofix && dealers");
       showProdelivery_both();
       var deliveryOptions = [];
