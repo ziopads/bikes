@@ -4,25 +4,48 @@ $(document).ready(function(){
   ///////////////////////////////////////////////////////////////////////
   function hideProdelivery(){
     $('#prodelivery_loading').hide();
-    $('#prodelivery_yes').hide();
+    $('#prodelivery_dealer').hide();
+    $('#prodelivery_velofix').hide();
+    $('#prodelivery_both').hide();
     $('#prodelivery_no').hide();
   }
 
   function showProdeliveryLoading(){
-    $('#prodelivery_yes').hide();
+    $('#prodelivery_dealer').hide();
+    $('#prodelivery_velofix').hide();
+    $('#prodelivery_both').hide();
     $('#prodelivery_no').hide();
     $('#prodelivery_loading').show();
   }
 
-  function showProdelivery_yes(){
+  function showProdelivery_dealer(){
     $('#prodelivery_loading').hide();
     $('#prodelivery_no').hide();
-    $('#prodelivery_yes').show();
+    $('#prodelivery_both').hide();
+    $('#prodelivery_velofix').hide();
+    $('#prodelivery_dealer').show();
+  }
+
+  function showProdelivery_velofix(){
+    $('#prodelivery_loading').hide();
+    $('#prodelivery_no').hide();
+    $('#prodelivery_both').hide();
+    $('#prodelivery_dealer').hide();
+    $('#prodelivery_velofix').show();
+  }
+
+  function showProdelivery_both(){
+    $('#prodelivery_loading').hide();
+    $('#prodelivery_no').hide();
+    $('#prodelivery_dealer').hide();
+    $('#prodelivery_velofix').hide();
+    $('#prodelivery_both').show();
   }
 
   function showProdelivery_no(){
     $('#prodelivery_loading').hide();
-    $('#prodelivery_yes').hide();
+    $('#prodelivery_dealer').hide();
+    $('#prodelivery_velofix').hide();
     $('#prodelivery_no').show();
   }
   ////////////////////////////////////////////////////////////////////////
@@ -66,7 +89,7 @@ $(document).ready(function(){
   ///////////////////////////////////////////////////////////////////////
   function renderPurchaseOptions(){
     // FIRST, DELETE ANY EXISTING LIST ITEMS
-    $('#postcode_results').empty();
+    $('.postcode_results').empty();
     // IF !DEALER && !VELOFIX, SHOW PRODELIVERY_NO, HIDE PRODELIVERY_YES
     // ELSE IF DEALER || VELOFIX, SHOW PRODELIVERY_YES, HIDE PRODELIVERY_NO
     if($.cookie('velofix') || $.cookie('dealers')){
@@ -83,7 +106,7 @@ $(document).ready(function(){
        deliveryOptions.push('Velofix Delivery');
       }
       for (var i = 0; i < deliveryOptions.length; i++) {
-        $('#postcode_results').append($('<li>' + deliveryOptions[i] + '</li>'));
+        $('.postcode_results').append($('<li>' + deliveryOptions[i] + '</li>'));
       }
       if($.cookie('selectedDeliveryOption')){
         var string = $.cookie('selectedDeliveryOption');
@@ -101,8 +124,8 @@ $(document).ready(function(){
   //  deselect previous default,
   //  and update styling accordingly
   ///////////////////////////////////////////////////////////////////////
-  $('#postcode_results').on('click', 'li', function(e){
-    $('#postcode_results li.selected').css('color', '#888');
+  $('.postcode_results').on('click', 'li', function(e){
+    $('.postcode_results li.selected').css('color', '#888');
     $('#postcode li.selected').removeClass('selected');
     $(this).addClass('selected').css('color', '#004cff');
     var selected = $(this).text();
