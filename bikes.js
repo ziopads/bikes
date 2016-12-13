@@ -199,7 +199,7 @@ $(document).ready(function(){
       alert("Please enter a valid postal code.")
       // console.log(data.status.message);
       $.cookie('postcode', '', { expires: 30, path: '/' });
-      return "Please enter a legit postal code";
+      return [];
     }
     var postalCodes = [];
     for (var i = 0; i < data.postalCodes.length; i++) {
