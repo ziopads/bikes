@@ -160,7 +160,8 @@ $(document).ready(function(){
       $('#delivery_method').val('Velofix');
     } else {
       showProdelivery_no();
-
+      $.cookie('selectedDeliveryOption', 'Direct Ship', { expires: 30, path: '/' });
+      $('#delivery_method').val('Direct Ship');
     }
   }
 
@@ -177,7 +178,6 @@ $(document).ready(function(){
     var selected = $(this).text();
     $.cookie('selectedDeliveryOption', selected, { expires: 30, path: '/' });
     $('#delivery_method').val(selected);
-    console.log(selected);
   })
 
   /////////////////////////////////////////////////////////////////////////
