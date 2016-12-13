@@ -134,18 +134,18 @@ $(document).ready(function(){
       console.log("!velofix && dealers");
       var deliveryOptions = [];
       var dealerOptionsFromCookie = $.cookie('dealers');
+      var arrayFromCookieDealer = dealerOptionsFromCookie.split(',');
       //////////////////////////
-      if(dealerOptionsFromCookie.length == 1){
-        console.log("There's only one dealer: ", dealerOptionsFromCookie.length);
+      if(arrayFromCookieDealer.length == 1){
+        console.log("There's only one dealer: ", arrayFromCookieDealer.length);
         showProdelivery_dealer();
-        $('.postcode_results').append($('<li>' + dealerOptionsFromCookie[0] + '</li>'));
-        $.cookie('selectedDeliveryOption', dealerOptionsFromCookie[0], { expires: 30, path: '/' });
-        $('#hiddenDeliveryOption').text(dealerOptionsFromCookie[0]);
+        $('.postcode_results').append($('<li>' + arrayFromCookieDealer[0] + '</li>'));
+        $.cookie('selectedDeliveryOption', arrayFromCookieDealer[0], { expires: 30, path: '/' });
+        $('#hiddenDeliveryOption').text(arrayFromCookieDealer[0]);
       //////////////////////////
-      } else if(dealerOptionsFromCookie.length > 1){
-        console.log("There's more than one dealer: ", dealerOptionsFromCookie.length);
+      } else if(arrayFromCookieDealer.length > 1){
+        console.log("There's more than one dealer: ", arrayFromCookieDealer.length);
         showProdelivery_dealers();
-        var arrayFromCookieDealer = dealerOptionsFromCookie.split(',');
         for (var i = 0; i < arrayFromCookieDealer.length; i++) {
           deliveryOptions.push(arrayFromCookieDealer[i]);
         }
