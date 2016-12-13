@@ -136,12 +136,14 @@ $(document).ready(function(){
       var dealerOptionsFromCookie = $.cookie('dealers');
       //////////////////////////
       if(dealerOptionsFromCookie.length == 1){
+        console.log("There's only one dealer: ", dealerOptionsFromCookie.length);
         showProdelivery_dealer();
         $('.postcode_results').append($('<li>' + dealerOptionsFromCookie[0] + '</li>'));
         $.cookie('selectedDeliveryOption', dealerOptionsFromCookie[0], { expires: 30, path: '/' });
         $('#hiddenDeliveryOption').text(dealerOptionsFromCookie[0]);
       //////////////////////////
       } else if(dealerOptionsFromCookie.length > 1){
+        console.log("There's more than one dealer: ", dealerOptionsFromCookie.length);
         showProdelivery_dealers();
         var arrayFromCookieDealer = dealerOptionsFromCookie.split(',');
         for (var i = 0; i < arrayFromCookieDealer.length; i++) {
