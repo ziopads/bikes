@@ -199,7 +199,7 @@ $(document).ready(function(){
       alert("Please enter a valid postal code.")
       // console.log(data.status.message);
       $.cookie('postcode', '', { expires: 30, path: '/' });
-      return false;
+      return;
     }
     var postalCodes = [];
     for (var i = 0; i < data.postalCodes.length; i++) {
@@ -224,7 +224,7 @@ $(document).ready(function(){
         console.log("postalCodeArray: ", postalCodeArray);
         if(!postalCodeArray){
           alert("You have no postalCodeArray")
-          return false;
+          return falsy;
         }
         // CREATE AN ARRAY OF PROMISES FOR SECOND API CALL
         var arrayOfPromises = postalCodeArray.map(fetchDealers);
