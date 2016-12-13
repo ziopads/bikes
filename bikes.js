@@ -224,7 +224,7 @@ $(document).ready(function(){
         console.log("postalCodeArray: ", postalCodeArray);
         if(!postalCodeArray){
           alert("You have no postalCodeArray")
-          return falsy;
+          return "Invalid Postal Code";
         }
         // CREATE AN ARRAY OF PROMISES FOR SECOND API CALL
         var arrayOfPromises = postalCodeArray.map(fetchDealers);
