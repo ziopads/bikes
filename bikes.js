@@ -139,7 +139,7 @@ $(document).ready(function(){
       if(arrayFromCookieDealer.length == 1){
         console.log("There's only one dealer: ", arrayFromCookieDealer.length);
         showProdelivery_dealer();
-        $('.postcode_results').append($('<li>' + arrayFromCookieDealer[0] + '</li>')).addClass('selected').css('color', '#004cff');
+        $('.postcode_results').append($('<li class='selected' color='#004cff'>' + arrayFromCookieDealer[0] + '</li>'));
         $.cookie('selectedDeliveryOption', arrayFromCookieDealer[0], { expires: 30, path: '/' });
         $('#hiddenDeliveryOption').text(arrayFromCookieDealer[0]);
       //////////////////////////
@@ -264,6 +264,7 @@ $(document).ready(function(){
         var arrayOfPromises = postalCodeArray.map(fetchVelofix);
         return Promise.all(arrayOfPromises)
           .then(function(arrayOfValuesOrErrors){
+            console.log("arrayOfValuesOrErrors: ", arrayOfValuesOrErrors);
             for (var i = 0; i < arrayOfValuesOrErrors.length; i++) {
               if(arrayOfValuesOrErrors[i]){
                 $.cookie('velofix', true, { expires: 30, path: '/' });
@@ -300,6 +301,7 @@ $(document).ready(function(){
         if(!data[0]){
           return;
         }
+        console.log("Result from each dealer api call: ", data);
         return data;
       })
   }
