@@ -155,7 +155,7 @@ $(document).ready(function(){
           $('#hiddenDeliveryOption').text(string);
         }
       }
-    } else if($.cookie('velofix') && $.cookie('dealers') == ''){
+    } else if($.cookie('velofix') == 'true' && $.cookie('dealers') == ''){
       showProdelivery_velofix();
       // $('.postcode_results').append($('<li>' + "Velofix" + '</li>'));
       $.cookie('selectedDeliveryOption', 'Velofix', { expires: 30, path: '/' });
