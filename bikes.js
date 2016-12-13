@@ -137,11 +137,9 @@ $(document).ready(function(){
     } else if($.cookie('velofix') && $.cookie('dealers') == ''){
       console.log("velofix && !dealers");
       showProdelivery_velofix();
-      $('.postcode_results').append($('<li>' + "Velofix" + '</li>'));
-      if($.cookie('selectedDeliveryOption')){
-        var string = $.cookie('selectedDeliveryOption');
-        $('li:contains("' + string + '")').addClass('selected').css('color', '#004cff');
-        $('#hiddenDeliveryOption').text(string);
+      // $('.postcode_results').append($('<li>' + "Velofix" + '</li>'));
+      $.cookie('selectedDeliveryOption', 'Velofix', { expires: 30, path: '/' });
+      $('#hiddenDeliveryOption').text('Velofix');
       }
     } else {
       showProdelivery_no();
