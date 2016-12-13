@@ -85,23 +85,20 @@ $(document).ready(function(){
     var postcode = $('#postcode').val();
     if(!postcode){
       if($.cookie('postcode')){
-        postcode = $.cookie('postcode');
+        renderPurchaseOptions();
       } else {
         showProdelivery_no();
         return
       }
-      console.log("NO POSTCODE");
     } else {
-
-      console.log(postcode);
+      $.cookie.raw = true;
+      $.cookie('postcode', postcode, { expires: 30, path: '/' });
+      $.cookie('dealers', [], { expires: 30, path: '/' });
+      $.cookie('velofix', 'false', { expires: 30, path: '/' });
+      $.cookie('deliveryOption', '', { expires: 30, path: '/' });
+      $.cookie('selectedDeliveryOption', '', { expires: 30, path: '/' });
+      postcodeLookup(postcode);
     }
-    $.cookie.raw = true;
-    $.cookie('postcode', postcode, { expires: 30, path: '/' });
-    $.cookie('dealers', [], { expires: 30, path: '/' });
-    $.cookie('velofix', 'false', { expires: 30, path: '/' });
-    $.cookie('deliveryOption', '', { expires: 30, path: '/' });
-    $.cookie('selectedDeliveryOption', '', { expires: 30, path: '/' });
-    postcodeLookup(postcode);
   }
 
   ///////////////////////////////////////////////////////////////////////
