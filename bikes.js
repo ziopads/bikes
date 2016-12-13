@@ -230,6 +230,7 @@ $(document).ready(function(){
         var arrayOfPromises = postalCodeArray.map(fetchDealers);
         return Promise.all(arrayOfPromises)
           .then(function(arrayOfValuesOrErrors){
+            console.log("arrayOfValuesOrErrors: ", arrayOfValuesOrErrors);
             var dealerArray = [];
             for (var i = 0; i < arrayOfValuesOrErrors.length; i++) {
               if(arrayOfValuesOrErrors[i]){
@@ -264,7 +265,6 @@ $(document).ready(function(){
         var arrayOfPromises = postalCodeArray.map(fetchVelofix);
         return Promise.all(arrayOfPromises)
           .then(function(arrayOfValuesOrErrors){
-            console.log("arrayOfValuesOrErrors: ", arrayOfValuesOrErrors);
             for (var i = 0; i < arrayOfValuesOrErrors.length; i++) {
               if(arrayOfValuesOrErrors[i]){
                 $.cookie('velofix', true, { expires: 30, path: '/' });
