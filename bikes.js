@@ -139,7 +139,7 @@ $(document).ready(function(){
       if(arrayFromCookieDealer.length == 1){
         console.log("There's only one dealer: ", arrayFromCookieDealer.length);
         showProdelivery_dealer();
-        $('.postcode_results').append($('<li>' + arrayFromCookieDealer[0] + '</li>'));
+        $('.postcode_results').append($('<li>' + arrayFromCookieDealer[0] + '</li>')).addClass('selected').css('color', '#004cff');
         $.cookie('selectedDeliveryOption', arrayFromCookieDealer[0], { expires: 30, path: '/' });
         $('#hiddenDeliveryOption').text(arrayFromCookieDealer[0]);
       //////////////////////////
