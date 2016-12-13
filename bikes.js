@@ -197,10 +197,9 @@ $(document).ready(function(){
   /////////////////////////////////////////////////////////////////////////
   function getArrayOfPostcodes(data){
     if(!data.postalCodes){
-      alert("Please enter a valid postal code.")
       console.log(data.status.message);
       $.cookie('postcode', '', { expires: 30, path: '/' });
-      return [];
+      return false;
     }
     var postalCodes = [];
     for (var i = 0; i < data.postalCodes.length; i++) {
@@ -260,8 +259,7 @@ $(document).ready(function(){
       })
       .then(function(postalCodeArray){
         if(!postalCodeArray){
-          alert("Please enter a valid postal code")
-          return "Please enter a valid postal code";
+          return false;
         }
         // CREATE AN ARRAY OF PROMISES FOR SECOND API CALL
         var arrayOfPromises = postalCodeArray.map(fetchVelofix);
