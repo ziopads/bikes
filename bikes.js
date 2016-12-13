@@ -92,11 +92,10 @@ $(document).ready(function(){
     postcodeLookup(postcode);
   }
 
-  $('#postocde_search').keypress(function(event){
-    if(event.keyCode===10 || event.keyCode===13){
+  $('button[type=submit]').keypress(function(event){
+    if (event.keyCode === 10 || event.keyCode === 13) 
       event.preventDefault();
-    }
-  })
+  });
 
   ///////////////////////////////////////////////////////////////////////
   // IF COOKIE:POSTCODE, INVOKE FUNCTION TO RENDER PURCHASE OPTIONS
