@@ -84,6 +84,12 @@ $(document).ready(function(){
     showProdeliveryLoading();
     var postcode = $('#postcode').val();
     if(!postcode){
+      if($.cookie('postcode')){
+        postcode = $.cookie('postcode');
+      } else {
+        showProdelivery_no();
+        return
+      }
       console.log("NO POSTCODE");
     } else {
 
