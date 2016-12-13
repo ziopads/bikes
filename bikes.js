@@ -89,6 +89,7 @@ $(document).ready(function(){
     $.cookie('velofix', false, { expires: 30, path: '/' });
     $.cookie('deliveryOption', '', { expires: 30, path: '/' });
     $.cookie('selectedDeliveryOption', '', { expires: 30, path: '/' });
+    $('#hiddenDeliveryOption').empty();
     postcodeLookup(postcode);
   }
 
@@ -108,7 +109,6 @@ $(document).ready(function(){
     $('.postcode_results').empty();
     //////////////////////////
     if($.cookie('velofix') == 'true' && $.cookie('dealers')){
-      console.log("velofix && dealers");
       showProdelivery_both();
       var deliveryOptions = [];
       var dealerOptionsFromCookie = $.cookie('dealers');
@@ -131,20 +131,17 @@ $(document).ready(function(){
       }
     //////////////////////////
     } else if($.cookie('velofix') == 'false' && $.cookie('dealers')){
-      console.log("!velofix && dealers");
       var deliveryOptions = [];
       var dealerOptionsFromCookie = $.cookie('dealers');
       var arrayFromCookieDealer = dealerOptionsFromCookie.split(',');
       //////////////////////////
       if(arrayFromCookieDealer.length == 1){
-        console.log("There's only one dealer: ", arrayFromCookieDealer.length);
         showProdelivery_dealer();
         $('.postcode_results').append($('<li class="selected" style="color: #004cff">' + arrayFromCookieDealer[0] + '</li>'));
         $.cookie('selectedDeliveryOption', arrayFromCookieDealer[0], { expires: 30, path: '/' });
         $('#hiddenDeliveryOption').text(arrayFromCookieDealer[0]);
       //////////////////////////
       } else if(arrayFromCookieDealer.length > 1){
-        console.log("There's more than one dealer: ", arrayFromCookieDealer.length);
         showProdelivery_dealers();
         for (var i = 0; i < arrayFromCookieDealer.length; i++) {
           deliveryOptions.push(arrayFromCookieDealer[i]);
@@ -159,7 +156,6 @@ $(document).ready(function(){
         }
       }
     } else if($.cookie('velofix') && $.cookie('dealers') == ''){
-      console.log("velofix && !dealers");
       showProdelivery_velofix();
       // $('.postcode_results').append($('<li>' + "Velofix" + '</li>'));
       $.cookie('selectedDeliveryOption', 'Velofix', { expires: 30, path: '/' });
@@ -200,6 +196,7 @@ $(document).ready(function(){
   /////////////////////////////////////////////////////////////////////////
   function getArrayOfPostcodes(data){
     if(!data.postalCodes){
+      alert("Please enter a valid postal code.")
       // console.log(data.status.message);
       $.cookie('postcode', '', { expires: 30, path: '/' });
       return false;
@@ -220,17 +217,19 @@ $(document).ready(function(){
         console.log("Please enter a valid postal code");
       })
       .then(function(data){
+        console.log(data);
         return getArrayOfPostcodes(data);
       })
       .then(function(postalCodeArray){
+        console.log("postalCodeArray: ", postalCodeArray);
         if(!postalCodeArray){
+          alert("You have no postalCodeArray")
           return false;
         }
         // CREATE AN ARRAY OF PROMISES FOR SECOND API CALL
         var arrayOfPromises = postalCodeArray.map(fetchDealers);
         return Promise.all(arrayOfPromises)
           .then(function(arrayOfValuesOrErrors){
-            console.log("arrayOfValuesOrErrors: ", arrayOfValuesOrErrors);
             var dealerArray = [];
             for (var i = 0; i < arrayOfValuesOrErrors.length; i++) {
               if(arrayOfValuesOrErrors[i]){
@@ -303,7 +302,6 @@ $(document).ready(function(){
         if(!data[0]){
           return;
         }
-        console.log("Result from each dealer api call: ", data);
         return data;
       })
   }
