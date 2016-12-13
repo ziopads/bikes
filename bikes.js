@@ -86,7 +86,7 @@ $(document).ready(function(){
     $.cookie.raw = true;
     $.cookie('postcode', postcode, { expires: 30, path: '/' });
     $.cookie('dealers', [], { expires: 30, path: '/' });
-    $.cookie('velofix', false, { expires: 30, path: '/' });
+    $.cookie('velofix', 'false', { expires: 30, path: '/' });
     $.cookie('deliveryOption', '', { expires: 30, path: '/' });
     $.cookie('selectedDeliveryOption', '', { expires: 30, path: '/' });
     $('#hiddenDeliveryOption').empty();
@@ -162,6 +162,7 @@ $(document).ready(function(){
       $('#hiddenDeliveryOption').text('Velofix');
     } else {
       showProdelivery_no();
+
     }
   }
 
@@ -197,7 +198,7 @@ $(document).ready(function(){
   function getArrayOfPostcodes(data){
     if(!data.postalCodes){
       alert("Please enter a valid postal code.")
-      // console.log(data.status.message);
+      console.log(data.status.message);
       $.cookie('postcode', '', { expires: 30, path: '/' });
       return [];
     }
@@ -217,14 +218,13 @@ $(document).ready(function(){
         console.log("Please enter a valid postal code");
       })
       .then(function(data){
-        console.log(data);
         return getArrayOfPostcodes(data);
       })
       .then(function(postalCodeArray){
-        console.log("postalCodeArray: ", postalCodeArray);
+        // console.log("postalCodeArray: ", postalCodeArray);
         if(!postalCodeArray){
-          alert("You have no postalCodeArray")
-          return "Invalid Postal Code";
+          // alert("You have no postalCodeArray")
+          return false;
         }
         // CREATE AN ARRAY OF PROMISES FOR SECOND API CALL
         var arrayOfPromises = postalCodeArray.map(fetchDealers);
@@ -260,7 +260,8 @@ $(document).ready(function(){
       })
       .then(function(postalCodeArray){
         if(!postalCodeArray){
-          return false;
+          alert("Please enter a valid postal code")
+          return "Please enter a valid postal code";
         }
         // CREATE AN ARRAY OF PROMISES FOR SECOND API CALL
         var arrayOfPromises = postalCodeArray.map(fetchVelofix);
