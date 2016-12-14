@@ -78,6 +78,7 @@ $(document).ready(function(){
   // EVENTHANDLER FOR POSTCODE SEARCH BUTTON
   ///////////////////////////////////////////////////////////////////////
   $('#postcode_search').click(search);
+  $('#cart_checkout').prop( "disabled", true );
 
   function search(){
     $('#delivery_method').val('');
@@ -106,12 +107,14 @@ $(document).ready(function(){
   if($.cookie('postcode')){
     $('#postcode').attr('placeholder', ($.cookie('postcode')));
     renderPurchaseOptions();
+    // $('#cart_checkout').prop( "disabled", false );
   }
 
   ///////////////////////////////////////////////////////////////////////
   // FUNCTION TO RENDER PURCHASE OPTIONS
   ///////////////////////////////////////////////////////////////////////
   function renderPurchaseOptions(){
+    $('#cart_checkout').prop( "disabled", false );
     // FIRST, DELETE ANY EXISTING LIST ITEMS
     $('.postcode_results').empty();
     //////////////////////////
