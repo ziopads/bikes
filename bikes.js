@@ -72,12 +72,18 @@ $(document).ready(function(){
   //   if($('#postcode').focus(search);
   // });
 
-  $(document).keypress(function(event){
-    if (event.keyCode === 10 || event.keyCode === 13)
-      event.preventDefault();
-      if($('#postcode').focus(search);
+  // $(document).keypress(function(event){
+  //   if (event.keyCode === 10 || event.keyCode === 13)
+  //     event.preventDefault();
+  //     if($('#postcode').focus(search);
+  // });
 
-  });
+  if($('#postcode:focus')){
+    $("form.cart").submit(function(){
+      return false;
+    });
+
+  }
 
   ///////////////////////////////////////////////////////////////////////
   // EVENTHANDLER FOR POSTCODE SEARCH BUTTON
