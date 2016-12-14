@@ -67,9 +67,16 @@ $(document).ready(function(){
   ////////////////////////////////////////////////////////////////////////
   hideProdelivery();
 
-  $(document).keypress(function(e) {
-    e.preventDefault();
-    if($('#postcode').focus(search);
+  // $(document).keypress(function(e) {
+  //   e.preventDefault();
+  //   if($('#postcode').focus(search);
+  // });
+
+  $(document).keypress(function(event){
+    if (event.keyCode === 10 || event.keyCode === 13)
+      event.preventDefault();
+      if($('#postcode').focus(search);
+
   });
 
   ///////////////////////////////////////////////////////////////////////
