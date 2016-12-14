@@ -107,14 +107,14 @@ $(document).ready(function(){
   if($.cookie('postcode')){
     $('#postcode').attr('placeholder', ($.cookie('postcode')));
     renderPurchaseOptions();
-    $("button[name='checkout']").button('enable');
+    $("button[name='checkout']").removeAttr('disabled');
   }
 
   ///////////////////////////////////////////////////////////////////////
   // FUNCTION TO RENDER PURCHASE OPTIONS
   ///////////////////////////////////////////////////////////////////////
   function renderPurchaseOptions(){
-    $("button[name='checkout']").button('enable');
+    $("button[name='checkout']").removeAttr('disabled');
     // FIRST, DELETE ANY EXISTING LIST ITEMS
     $('.postcode_results').empty();
     //////////////////////////
