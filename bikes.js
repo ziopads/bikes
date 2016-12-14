@@ -105,7 +105,7 @@ $(document).ready(function(){
   // IF COOKIE:POSTCODE, INVOKE FUNCTION TO RENDER PURCHASE OPTIONS
   ///////////////////////////////////////////////////////////////////////
   if($.cookie('postcode')){
-    // $('#postcode').attr('placeholder', ($.cookie('postcode')));
+    $('#postcode').attr('placeholder', ($.cookie('postcode')));
     renderPurchaseOptions();
     // $('#cart_checkout').attr( "disabled", false );
   }
@@ -114,7 +114,7 @@ $(document).ready(function(){
   // FUNCTION TO RENDER PURCHASE OPTIONS
   ///////////////////////////////////////////////////////////////////////
   function renderPurchaseOptions(){
-    $("button[name='checkout']").attr( "disabled", "disabled" );
+    $("button[name='checkout']").button('enable');
     // FIRST, DELETE ANY EXISTING LIST ITEMS
     $('.postcode_results').empty();
     //////////////////////////
