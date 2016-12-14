@@ -78,7 +78,7 @@ $(document).ready(function(){
   // EVENTHANDLER FOR POSTCODE SEARCH BUTTON
   ///////////////////////////////////////////////////////////////////////
   $('#postcode_search').click(search);
-  $("button[name='checkout']").prop( "disabled", true );
+  $("button[name='checkout']").attr( "disabled", "disabled" );
 
   function search(){
     $('#delivery_method').val('');
@@ -105,16 +105,16 @@ $(document).ready(function(){
   // IF COOKIE:POSTCODE, INVOKE FUNCTION TO RENDER PURCHASE OPTIONS
   ///////////////////////////////////////////////////////////////////////
   if($.cookie('postcode')){
-    $('#postcode').attr('placeholder', ($.cookie('postcode')));
+    // $('#postcode').attr('placeholder', ($.cookie('postcode')));
     renderPurchaseOptions();
-    // $('#cart_checkout').prop( "disabled", false );
+    // $('#cart_checkout').attr( "disabled", false );
   }
 
   ///////////////////////////////////////////////////////////////////////
   // FUNCTION TO RENDER PURCHASE OPTIONS
   ///////////////////////////////////////////////////////////////////////
   function renderPurchaseOptions(){
-    $("button[name='checkout']").prop( "disabled", false );
+    $("button[name='checkout']").attr( "disabled", "disabled" );
     // FIRST, DELETE ANY EXISTING LIST ITEMS
     $('.postcode_results').empty();
     //////////////////////////
