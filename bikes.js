@@ -107,7 +107,7 @@ $(document).ready(function(){
   if($.cookie('postcode')){
     $('#postcode').attr('placeholder', ($.cookie('postcode')));
     renderPurchaseOptions();
-    // $('#cart_checkout').attr( "disabled", false );
+    $("button[name='checkout']").button('enable');
   }
 
   ///////////////////////////////////////////////////////////////////////
