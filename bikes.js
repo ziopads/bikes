@@ -89,6 +89,7 @@ $(document).ready(function(){
         postcode = $.cookie('postcode');
       } else {
         showProdelivery_no();
+        $("button[name='checkout']").attr( "disabled", "disabled" );
         return
       }
     }
@@ -98,7 +99,7 @@ $(document).ready(function(){
     $.cookie('velofix', 'false', { expires: 30, path: '/' });
     $.cookie('deliveryOption', '', { expires: 30, path: '/' });
     $.cookie('selectedDeliveryOption', '', { expires: 30, path: '/' });
-    $("button[name='checkout']").removeAttr('disabled');
+    $("button[name='checkout']").attr( "disabled", "disabled" );
     postcodeLookup(postcode);
   }
 
