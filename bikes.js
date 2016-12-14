@@ -85,9 +85,8 @@ $(document).ready(function(){
   //   }
   // })
   $('#postcode:focus').keypress(function(e){
-    alert('WHOA!')
-    }
-  })
+    alert('WHOA!');
+  });
 
   // {
   //   $("form.cart").submit(function(){
