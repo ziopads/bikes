@@ -84,8 +84,13 @@ $(document).ready(function(){
   //     search();
   //   }
   // })
-  $('#postcode:focus').keypress(function(e){
-    alert('WHOA!');
+  $('#postcode').on('focus', function(){
+    $(document).keypress(function(event){
+      if (event.keyCode === 10 || event.keyCode === 13){
+        event.preventDefault();
+        search();
+      }
+    })
   });
 
   // {
