@@ -107,6 +107,10 @@ $(document).ready(function(){
   if($.cookie('postcode')){
     $('#postcode').attr('placeholder', ($.cookie('postcode')));
     renderPurchaseOptions();
+    // $("button[name='checkout']").removeAttr('disabled');
+  }
+
+  if($.cookie('selectedDeliveryOption')){
     $("button[name='checkout']").removeAttr('disabled');
   }
 
@@ -114,7 +118,6 @@ $(document).ready(function(){
   // FUNCTION TO RENDER PURCHASE OPTIONS
   ///////////////////////////////////////////////////////////////////////
   function renderPurchaseOptions(){
-    $("button[name='checkout']").removeAttr('disabled');
     // FIRST, DELETE ANY EXISTING LIST ITEMS
     $('.postcode_results').empty();
     //////////////////////////
@@ -138,6 +141,7 @@ $(document).ready(function(){
         var string = $.cookie('selectedDeliveryOption');
         $('li:contains("' + string + '")').addClass('selected').css('color', '#004cff');
         $('#delivery_method').val(string);
+        $("button[name='checkout']").removeAttr('disabled');
       }
     //////////////////////////
     } else if($.cookie('velofix') == 'false' && $.cookie('dealers')){
@@ -150,6 +154,7 @@ $(document).ready(function(){
         $('.postcode_results').append($('<li class="selected" style="color: #004cff">' + arrayFromCookieDealer[0] + '</li>'));
         $.cookie('selectedDeliveryOption', arrayFromCookieDealer[0], { expires: 30, path: '/' });
         $('#delivery_method').val(arrayFromCookieDealer[0]);
+        $("button[name='checkout']").removeAttr('disabled');
       //////////////////////////
       } else if(arrayFromCookieDealer.length > 1){
         showProdelivery_dealers();
@@ -163,16 +168,19 @@ $(document).ready(function(){
           var string = $.cookie('selectedDeliveryOption');
           $('li:contains("' + string + '")').addClass('selected').css('color', '#004cff');
           $('#delivery_method').val(string);
+          $("button[name='checkout']").removeAttr('disabled');
         }
       }
     } else if($.cookie('velofix') == 'true' && $.cookie('dealers') == ''){
       showProdelivery_velofix();
       $.cookie('selectedDeliveryOption', 'Velofix', { expires: 30, path: '/' });
       $('#delivery_method').val('Velofix');
+      $("button[name='checkout']").removeAttr('disabled');
     } else {
       showProdelivery_no();
       $.cookie('selectedDeliveryOption', 'Direct Ship', { expires: 30, path: '/' });
       $('#delivery_method').val('Direct Ship');
+      $("button[name='checkout']").removeAttr('disabled');
     }
   }
 
@@ -189,6 +197,7 @@ $(document).ready(function(){
     var selected = $(this).text();
     $.cookie('selectedDeliveryOption', selected, { expires: 30, path: '/' });
     $('#delivery_method').val(selected);
+    $("button[name='checkout']").removeAttr('disabled');
   })
 
   /////////////////////////////////////////////////////////////////////////
