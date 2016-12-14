@@ -78,7 +78,7 @@ $(document).ready(function(){
   // EVENTHANDLER FOR POSTCODE SEARCH BUTTON
   ///////////////////////////////////////////////////////////////////////
   $('#postcode_search').click(search);
-  $('#cart_checkout').prop( "disabled", true );
+  $("button, input[name='checkout']").prop( "disabled", true );
 
   function search(){
     $('#delivery_method').val('');
@@ -114,7 +114,7 @@ $(document).ready(function(){
   // FUNCTION TO RENDER PURCHASE OPTIONS
   ///////////////////////////////////////////////////////////////////////
   function renderPurchaseOptions(){
-    $('#cart_checkout').prop( "disabled", false );
+    $("button, input[name='checkout']").prop( "disabled", false );
     // FIRST, DELETE ANY EXISTING LIST ITEMS
     $('.postcode_results').empty();
     //////////////////////////
