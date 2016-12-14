@@ -67,12 +67,10 @@ $(document).ready(function(){
   ////////////////////////////////////////////////////////////////////////
   hideProdelivery();
 
-  // $(document).keypress(function(e) {
-  //   e.preventDefault();
-  //   if($('#postcode').val()) {
-  //     search();
-  //   }
-  // });
+  $(document).keypress(function(e) {
+    e.preventDefault();
+    if($('#postcode').focus(search);
+  });
 
   ///////////////////////////////////////////////////////////////////////
   // EVENTHANDLER FOR POSTCODE SEARCH BUTTON
