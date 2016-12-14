@@ -98,6 +98,7 @@ $(document).ready(function(){
     $.cookie('velofix', 'false', { expires: 30, path: '/' });
     $.cookie('deliveryOption', '', { expires: 30, path: '/' });
     $.cookie('selectedDeliveryOption', '', { expires: 30, path: '/' });
+    $("button[name='checkout']").removeAttr('disabled');
     postcodeLookup(postcode);
   }
 
