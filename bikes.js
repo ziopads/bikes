@@ -78,10 +78,14 @@ $(document).ready(function(){
   //     if($('#postcode').focus(search);
   // });
 
+  // $('#postcode:focus').keypress(function(e){
+  //   if (event.keyCode === 10 || event.keyCode === 13){
+  //     event.preventDefault();
+  //     search();
+  //   }
+  // })
   $('#postcode:focus').keypress(function(e){
-    if (event.keyCode === 10 || event.keyCode === 13){
-      event.preventDefault();
-      search();
+    alert('WHOA!')
     }
   })
 
